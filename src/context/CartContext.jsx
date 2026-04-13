@@ -17,11 +17,6 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // 🔹 Save cart to localStorage whenever it changes
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  // }, [cart]);
-
  useEffect(() => {
   const fetchCart = async () => {
     try {
@@ -37,34 +32,6 @@ export const CartProvider = ({ children }) => {
 
   fetchCart();
 }, []);
-
-  // 🔹 Add to Cart
-  // const addToCart = (product) => {
-  //   setCart(prevCart => {
-  //     const existing = prevCart.find(item => item._id === product._id);
-
-  //     if (existing) {
-  //       return prevCart.map(item =>
-  //         item._id === product._id
-  //           ? { ...item, qty: item.qty + 1 }
-  //           : item 
-  //       );
-  //     } else {
-  //       return [
-  //         ...prevCart,
-  //         {
-  //           _id: product._id,
-  //           name: product.name,
-  //           price: product.price || 0,
-  //           image: product.image,
-  //           stock:product.stock,
-  //           qty: 1
-  //         }
-  //       ];
-  //     }
-  //   });
-  //   toast.success("Added to cart successfully.");
-  // };
 
 
   const addToCart = async (product) => {
@@ -85,11 +52,7 @@ export const CartProvider = ({ children }) => {
   }
 };
 
-  // 🔹 Remove item completely
-  // const removeFromCart = (id) => {
-  //   setCart(prevCart => prevCart.filter(item => item._id !== id));
-  //   toast.info("Removed from the cart");
-  // };
+  
 
 const removeFromCart = async (productId) => {
   try {
@@ -109,29 +72,7 @@ const removeFromCart = async (productId) => {
   }
 };
 
-  // 🔹 Increase quantity
-  // const increaseQty = (id) => {
-  //   setCart(prevCart =>
-  //     prevCart.map(item =>
-  //       item._id === id
-  //         ? { ...item, qty: item.qty + 1 }
-  //         : item
-  //     )
-  //   );
-  // };
-
-  // 🔹 Decrease quantity
-  // const decreaseQty = (id) => {
-  //   setCart(prevCart =>
-  //     prevCart
-  //       .map(item =>
-  //         item._id === id
-  //           ? { ...item, qty: Math.max(item.qty - 1, 0) }
-  //           : item
-  //       )
-  //       .filter(item => item.qty > 0)
-  //   );
-  // };
+  
   const updateQty = async (productId, action) => {
   try {
     const res = await axios.put(
@@ -144,6 +85,7 @@ const removeFromCart = async (productId) => {
     );
 
     setCart(res.data.items);
+    
   } catch (err) {
     console.error(err);
   }

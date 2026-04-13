@@ -12,7 +12,7 @@ return(
         className="text-decoration-none text-dark"
       >
 
-<div className="card bg-warning p-3 text-center shadow-sm">
+<div className="card bgColor p-3 text-center shadow-sm">
         <h5>{cat}</h5>
       </div>
 

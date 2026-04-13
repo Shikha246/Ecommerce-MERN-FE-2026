@@ -1,25 +1,43 @@
 import { Link } from "react-router-dom";
-import ProductCard from "../components/ProductCard";
-
+import { useWishlist } from "../context/WishlistContext";
 import { useProducts } from "../context/ProductContext";
-
+import { useCart } from "../context/CartContext";
 import { useState } from "react";
-
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Navbar() {
 const [searchValue, setSearchValue] = useState("");
-const [filteredProd, setFilteredProd] = useState([]);
+// const [filteredProd, setFilteredProd] = useState([]);
 const { products } = useProducts();
-  
+const {wishlist} = useWishlist();
+const {cart} = useCart();
+  const navigate = useNavigate();
 function onSearchClicked(e) {
   e.preventDefault();
-
-  const filtered = products.filter((p) =>
-    p.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
-
-  setFilteredProd(filtered);
+  if (searchValue.trim()) {
+    navigate(`/products?search=${searchValue}`);
+  } else {
+    navigate(`/products`); // 👈 back to all products
+  }
 }
+  // const filtered = products.filter((p) =>
+  //   p.name.toLowerCase().includes(searchValue.toLowerCase())
+  // );
+// const filteredProd = products.filter(product =>
+//   product.name.toLowerCase().includes(searchQuery.toLowerCase())
+// );
+  // setFilteredProd(filteredProd);
+
+  const location = useLocation();
+
+const queryParams = new URLSearchParams(location.search);
+const searchQuery = queryParams.get("search") || "";
+useEffect(() => {
+  setSearchValue(searchQuery);
+}, [searchQuery]);
+
   return (
     <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -46,54 +64,97 @@ function onSearchClicked(e) {
         <div className="collapse navbar-collapse" id="navbarContent">
 
           {/* Search Bar */}
-          <form className="d-flex mx-auto w-50">
+          <form className="d-flex mx-auto w-50" onSubmit={onSearchClicked}>
             <input
   className="form-control me-2"
   type="search"
   placeholder="Search books..."
   value={searchValue}
-  onChange={(e) => setSearchValue(e.target.value)}
+  onChange={(e) => setSearchValue(e.target.value)} 
 />
-            <button className="btn btn-outline-light" onClick={onSearchClicked}>
+
+            <button className="btn btn-outline-light">
               Search
             </button>
-     
+     {searchValue && (
+  <button onClick={() => {
+    setSearchValue("");
+    navigate("/products");
+  }}>
+    ❌
+  </button>
+)}
           </form>
+          
 
           {/* Navigation Links */}
-          <div className="d-flex">
+          {/* <div className="navbar-nav">
 
-            <Link className="btn btn-outline-light mx-2" to="/products">
+            <Link className="btn btn-outline-light mx-2"  to="/products">
               Products
+              
             </Link>
 
             <Link className="btn btn-outline-light mx-2" to="/wishlist">
-              Wishlist
+              Wishlist 
+
+  
+  <span className="translate-middle badge rounded-pill bg-danger">
+  {wishlist.length}
+</span>
             </Link>
 
             <Link className="btn btn-outline-light mx-2" to="/cart">
               Cart
+              <span class="translate-middle badge rounded-pill bg-danger">
+  {cart.length}
+</span>
             </Link>
 
             <Link className="btn btn-outline-light mx-2" to="/profile">
               Profile
             </Link>
 
-          </div>
+          </div> */}
+          <ul className="navbar-nav ms-auto">
+
+  <li className="nav-item">
+    <Link className="nav-link" to="/products">
+      Products
+    </Link>
+  </li>
+
+  <li className="nav-item">
+    <Link className="nav-link" to="/wishlist">
+      Wishlist
+      <span className="badge bg-danger ms-1">
+        {wishlist.length}
+      </span>
+    </Link>
+  </li>
+
+  <li className="nav-item">
+    <Link className="nav-link" to="/cart">
+      Cart
+      <span className="badge bg-danger ms-1">
+        {cart.length}
+      </span>
+    </Link>
+  </li>
+
+  <li className="nav-item">
+    <Link className="nav-link" to="/profile">
+      Profile
+    </Link>
+  </li>
+
+</ul>
 
         </div>
       </div>
 
     </nav>
-    <div className="container mt-4">
-    {filteredProd.length > 0 ? (
-      filteredProd.map(product => (
-        <ProductCard key={product._id} product={product} />
-      ))
-    ) : (
-      <p></p>
-    )}
-  </div>
+    
   </>
   );
   

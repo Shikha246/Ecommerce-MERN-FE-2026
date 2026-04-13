@@ -6,7 +6,7 @@ export const useProducts = () => useContext(ProductContext);
 
 
 export const fetchProducts = async () =>{
-   let allProducts = await fetch("http://localhost:5000/api/products")
+   let allProducts = await fetch("https://ecommerce-mern-be-2026.vercel.app/api/products")
       .then((res) => res.json())
       .then((data) => {
         // debugger;
@@ -32,7 +32,7 @@ export const ProductProvider = ({ children }) => {
         // debugger;
         setProducts(data.data.products); // important
         setAllProducts(data.data.products);
-        console.log(products);
+        // console.log(products);
       })
       .catch((err) => console.log(err));
   }, []);

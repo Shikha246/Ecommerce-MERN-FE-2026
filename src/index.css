@@ -1,7 +1,9 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f8f9fa;
+  background-color: rgba(208, 176, 128, 0.852);
+  height: 100%;
+  /* overflow: hidden; */
 }
 
 #root {
@@ -10,4 +12,18 @@ body {
 
 a {
   text-decoration: none;
+}
+html {
+    height: 100%;
+}
+
+.myFooter{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #222;
+  color: rgb(233, 196, 196);
+  text-align: center;
+  padding: 10px;
 }

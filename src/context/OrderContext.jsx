@@ -8,20 +8,8 @@ export const OrderProvider = ({ children }) => {
 
   const [orders, setOrders] = useState([]);
 const userId = "65f1a2b3c4d5e6f7890abcd1";
-  // const placeOrder = (cartItems, address) => {
-  //   const newOrder = {
-  //     id: Date.now(),
-  //     items: cartItems,
-  //     address,
-  //     total: cartItems.reduce(
-  //       (total, item) => total + item.price * item.qty,
-  //       0
-  //     ),
-  //     date: new Date().toLocaleString()
-  //   };
+ 
 
-  //   setOrders(prev => [...prev, newOrder]);
-  // };
 
  // ✅ Fetch orders from DB
   const fetchOrders = async () => {

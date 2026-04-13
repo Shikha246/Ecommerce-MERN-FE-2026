@@ -20,17 +20,16 @@ export const AddressProvider = ({ children }) => {
     return [];
   };
 
-  const normalizeAddressPayload = (payload) => {
+ const normalizeAddressPayload = (payload) => {
   if (!payload) return null;
 
-  if (Array.isArray(payload)) {
-    return payload.length > 0 ? payload[0] : null;
-  }
-
+  // ✅ if backend sends { address: {...} }
   if (payload.address) return payload.address;
-  if (payload.data) return payload.data;
 
-  return payload;
+  // ✅ if backend sends direct object
+  if (payload._id) return payload;
+
+  return null;
 };
   // 📥 Fetch Addresses
   const fetchAddresses = async () => {
@@ -42,12 +41,13 @@ export const AddressProvider = ({ children }) => {
       );
 
       setAddresses(normalizeAddressesPayload(res.data));
+      console.log("FETCH RESPONSE:", res.data); 
 
     } catch (err) {
       console.error(err);
     }
   };
-
+// ✅ Load once when app starts
   useEffect(() => {
     fetchAddresses();
   }, [userId]); // ✅ important
@@ -68,7 +68,7 @@ console.log("API RESPONSE:", res.data);
         setAddresses((current) => [...current, createdAddress]);
         return createdAddress;
       }
-
+// 🔥 fallback (VERY IMPORTANT)
       await fetchAddresses();
       return null;
 
@@ -82,7 +82,7 @@ console.log("API RESPONSE:", res.data);
   const deleteAddress = async (id) => {
     try {
       await axios.delete(
-        `https://ecommerce-mern-be-2026.vercel.app/api/address/${id}`
+        `https://ecommerce-mern-be-2026.vercel.app/api/address/delete/${id}`
       );
 
       setAddresses((current) =>
@@ -106,7 +106,7 @@ console.log("API RESPONSE:", res.data);
       //   updatedAddress
       // );
 // debugger;
-      const response = await axios.put(`https://ecommerce-mern-be-2026.vercel.app/api/address/${id}`, updatedAddress);
+      const response = await axios.put(`https://ecommerce-mern-be-2026.vercel.app/api/address/update/${id}`, updatedAddress);
   console.log("FULL RESPONSE:", response);
 console.log("RESPONSE.DATA:", response.data);
 // debugger;

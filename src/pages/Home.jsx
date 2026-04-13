@@ -10,36 +10,29 @@ const { products,setProducts }  = useProducts();
 console.log(products);
  console.log("before function")
  fetchProducts().then((allProducts) => {
-  debugger;
+  // debugger;
  console.log("after function");
  console.log(allProducts);
 if(allProducts.length > products.length){
-  debugger;
+  // debugger;
   console.log("inside function");
 setProducts(allProducts);
 }
 }); 
 
-
-
-
-// let filteredProducts = products.filter(x => x.category.toLowerCase() == category);
-// console.log(filteredProducts); 
-// setProducts(filteredProducts);
-
-
   return(
-
-    <div className="container-fluid text-center mt-5">
+<div class="hero-image">
+    <div className="container-fluid text-center">
 
       <h1>Welcome to BookStore</h1>
 
 <Explore product={products} />
 
-      <Link className="btn btn-primary mt-3" to="/products">
+      <Link className="btn my-btn mt-3" to="/products">
         Explore Books
       </Link>
 
+    </div>
     </div>
   )
 

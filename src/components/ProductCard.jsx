@@ -9,7 +9,7 @@ function ProductCard({ product, isWishlistPage }) {
   const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
 
 
-console.log("wishlist:", wishlist);
+// console.log("wishlist:", wishlist);
   
 
 const isInCart = cart.some(
@@ -22,64 +22,66 @@ const isInWishlist = wishlist?.some(
 
 
   return (
-    <div className="card m-3" style={{ width: "20rem" }}>
+    <div className="card w-100 h-100 d-flex flex-column">
 
       <Link to={`/product/${product._id}`}>
-        <img src={product.image} className="card-img-top" style={{width:"20rem",height:"20rem"}} alt="product" />
+      {/* ,objectFit:"cover" */}
+        <img src={product.image} className="card-img-top img-fluid" style={{height:"160px"}} alt="product" />
       </Link>
 
-      <div className="card-body">
+      <div className="card-body d-flex flex-column">
 
-        <h5>{product.name}</h5>
+        <h6>{product.name}</h6>
         <p>₹{product.price}</p>
-        <p>⭐ {product.rating}</p>
+        {!isWishlistPage && <p>⭐ {product.rating}</p>}
         <p>In Stock:{product.stock}</p>
 {/* Add to Cart (ONLY for product listing) */}
-{!isWishlistPage && (
-  <button
-  className="btn btn-primary m-1"
-  onClick={() => addToCart(product)}
-  disabled={isInCart}
-  
->
-  {isInCart ? "In Cart": "Add to Cart"}
-  
-</button>
 
-)}
+<div className="d-flex flex-wrap gap-2 mt-2">
 
-{/* Wishlist Page Buttons */}
-{isWishlistPage ? (
-  <>
+  {!isWishlistPage && (
     <button
-      className="btn btn-primary m-1"
-      onClick={() => {
-        addToCart(product);
-        removeFromWishlist(product._id);
-      }}
+      className="btn btn-primary btn-sm flex-fill responsive-btn"
+      onClick={() => addToCart(product)}
+      disabled={isInCart}
     >
-      Move to Cart
+      {isInCart ? "In Cart" : "Add to Cart"}
     </button>
+  )}
 
-    <button
-      className="btn btn-danger m-1"
-      onClick={() => removeFromWishlist(product._id)}
-    >
-      Remove
+  {isWishlistPage ? (
+    <>
+      <button
+        className="btn btn-primary btn-sm flex-fill responsive-btn"
+        onClick={() => {
+          addToCart(product);
+          removeFromWishlist(product._id);
+        }}
+      >
+        Move to Cart
+      </button>
+
+      <button
+        className="btn btn-danger btn-sm flex-fill responsive-btn"
+        onClick={() => removeFromWishlist(product._id)}
+      >
+        Remove
+      </button>
+    </>
+  ) : isInWishlist ? (
+    <button className="btn btn-secondary btn-sm flex-fill responsive-btn" disabled>
+      Wishlisted
     </button>
-  </>
-) : isInWishlist ? (
-  <button className="btn btn-secondary m-1" disabled>
-    Wishlisted
-  </button>
-) : (
-  <button
-    className="btn btn-outline-danger m-1"
-    onClick={() => addToWishlist(product)}
-  >
-    Wishlist
-  </button>
-)}
+  ) : (
+    <button
+      className="btn btn-outline-danger btn-sm flex-fill responsive-btn"
+      onClick={() => addToWishlist(product)}
+    >
+      Wishlist
+    </button>
+  )}
+
+</div>
       </div>
     </div>
   );

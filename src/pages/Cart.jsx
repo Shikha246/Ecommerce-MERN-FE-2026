@@ -10,10 +10,10 @@ function Cart() {
 
   return (
     <div className="container mt-4">
-      <h2>Cart</h2>
+      <h2 className="text-center">My Cart({cart.length})</h2>
 
       {cart.length === 0 ? (
-        <p>Your cart is empty</p>
+        <p className="text-center">Your cart is empty</p>
       ) : (
         <div className="row">
           
@@ -25,11 +25,14 @@ const isInWishlist = (wishlist || []).some(
   id => id.toString() === (item?.productId?._id || item?.productId).toString()
 );
               return (
-                <div key={item.productId} className="border p-3 mb-3">
-                  <h5>{item.name}</h5>
+                <div key={item.productId} className="border p-3 mb-3 d-flex gap-3">
+                  
+                  
+                {/* left Image */}
+                  <img src={item.image} alt="book" width="200" height="250" />
 
-                  <img src={item.image} alt="book" width="150" />
-
+<div className="flex-grow-1">
+  <h5>{item.name}</h5>
                   {/* Quantity Controls */}
                   <div className="mt-2">
                     <button
@@ -83,6 +86,7 @@ const isInWishlist = (wishlist || []).some(
                     </button>
                   )}
                 </div>
+                </div>
               );
             })}
           </div>
@@ -90,7 +94,7 @@ const isInWishlist = (wishlist || []).some(
           {/* ✅ RIGHT SIDE - SINGLE PRICE SUMMARY */}
           <div className="col-md-4">
             <div className="card p-3">
-              <h3>Price Summary</h3>
+              <h3><strong>Price Details</strong></h3>
 
               {cart.map((item) => (
                 <div key={item.productId} className="border p-2 mb-2">
@@ -125,8 +129,11 @@ const isInWishlist = (wishlist || []).some(
 
         </div>
       )}
+     
     </div>
+    
   );
+
 }
 
 export default Cart;

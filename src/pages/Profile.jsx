@@ -15,6 +15,7 @@ const user = {
 function Profile() {
   const { cart, clearCart } = useCart();
   const { orders, placeOrder } = useOrder();
+  const [showModal, setShowModal] = useState(false);
   const {
     addresses,
     addAddress,
@@ -69,9 +70,9 @@ function Profile() {
         pincode: ""
       });
       toast("Address added successfully!");
-    } catch (error) {
-      console.error("Error adding address:", error);
-    }
+    } catch (err) {
+  console.error("FULL ERROR:", err.response?.data || err);
+}
   };
 
   // ✅ Delete
@@ -84,15 +85,20 @@ function Profile() {
   };
 
   // ✅ Start Edit
-  // const startEdit = (addr) => {
-  //   setNewAddress(addr);
-  //   setEditId(addr._id);
-  // };
+  
+// const startEdit = (addr) => {
+//   const { _id, ...rest } = addr;
+//   setNewAddress(rest);
+//   setEditId(_id);
+// };
+
 const startEdit = (addr) => {
   const { _id, ...rest } = addr;
   setNewAddress(rest);
   setEditId(_id);
+  setShowModal(true); // 🔥 open modal
 };
+
   // ✅ Update Address
   const handleUpdateAddress = async () => {
     if (!editId) return;
@@ -114,63 +120,8 @@ const startEdit = (addr) => {
     setEditId(null);
   };
 
-  // ✅ Place Order
-  // const handlePlaceOrder = () => {
-  //   if (!selectedAddress) {
-  //     alert("Please select an address");
-  //     return;
-  //   }
-
-
-// const handlePlaceOrder = async () => {
-//   if (!selectedAddress) {
-//     alert("Please select an address");
-//     return;
-//   }
-
-//   try {
-    // ✅ Clean address (remove unnecessary fields)
-//     const { _id, userId: addrUserId, ...cleanAddress } = selectedAddress;
-
-//     const orderData = {
-//       userId: user._id,
-//       items: cart,
-//       address: cleanAddress,
-//       total: cart.reduce((acc, item) => acc + item.price * item.qty, 0)
-//     };
-
-    // ✅ API CALL (THIS WAS MISSING)
-//     const res = await axios.post(
-//       "http://localhost:5000/api/orders/place",
-//       orderData
-//     );
-
-    // ✅ Save in context (optional but good)
-//     placeOrder(res.data);
-
-//     clearCart();
-//     setSelectedAddress(null);
-
-//     alert("Order Placed Successfully!");
-//   } catch (error) {
-//     console.error(error);
-//     alert("Failed to place order");
-//   }
-
-
-// const orderData = {
-//   userId: user._id,
-//   items: cart,
-//   address: selectedAddress, // ✅ full object
-//   total: cart.reduce((acc, item) => acc + item.price * item.qty, 0)
-// };
-//     placeOrder(cart, selectedAddress);
-//     clearCart();
-//     setSelectedAddress(null);
-//     alert("Placed Order");
-//   };
 const handlePlaceOrder = async () => {
-  debugger;
+  // debugger;
   if (!selectedAddress) {
     toast.warning("Please select an address");
     return;
@@ -203,6 +154,8 @@ const handlePlaceOrder = async () => {
     console.error(error);
     toast.error("Failed to place order");
   }
+
+  
 };
   return (
     <div className="container mt-4">
@@ -216,70 +169,114 @@ const handlePlaceOrder = async () => {
         <p><strong>Phone:</strong> {user.phone}</p>
       </div>
 
-      {/* ADDRESS FORM */}
-      <div className="card p-3 mb-3">
-        <h4>Addresses</h4>
 
-        <input
-          className="form-control mt-2"
-          placeholder="Full Name *"
-          name="name"
-          value={newAddress.name}
-          onChange={handleChange}
-        />
+      <button
+  className="btn btn-success mb-3"
+  onClick={() => {
+    setShowModal(true);
+    setEditId(null); // ensure it's fresh add mode
+  }}
+>
+  Add Address
+</button>
 
-        <input
-          className="form-control mt-2"
-          placeholder="Street Address *"
-          name="street"
-          value={newAddress.street}
-          onChange={handleChange}
-        />
+{showModal && (
+  <div className="modal fade show d-block" tabIndex="-1">
+    <div className="modal-dialog">
+      <div className="modal-content">
 
-        <input
-          className="form-control mt-2"
-          placeholder="City *"
-          name="city"
-          value={newAddress.city}
-          onChange={handleChange}
-        />
-
-        <input
-          className="form-control mt-2"
-          placeholder="State *"
-          name="state"
-          value={newAddress.state}
-          onChange={handleChange}
-        />
-
-        <input
-          className="form-control mt-2"
-          placeholder="Pincode *"
-          name="pincode"
-          value={newAddress.pincode}
-          onChange={handleChange}
-        />
-
-        {/* ✅ Toggle Add / Update */}
-        {editId ? (
+        <div className="modal-header">
+          <h5 className="modal-title">
+            {editId ? "Edit Address" : "Add Address"}
+          </h5>
           <button
-            type="button"
-            className="btn btn-primary mt-3"
-            onClick={handleUpdateAddress}
-            disabled={!isFormValid}
-          >
-            Update Address
-          </button>
-        ) : (
+            className="btn-close"
+            onClick={() => setShowModal(false)}
+          ></button>
+        </div>
+
+        <div className="modal-body">
+
+          <input
+            className="form-control mt-2"
+            placeholder="Full Name *"
+            name="name"
+            value={newAddress.name}
+            onChange={handleChange}
+          />
+
+          <input
+            className="form-control mt-2"
+            placeholder="Street Address *"
+            name="street"
+            value={newAddress.street}
+            onChange={handleChange}
+          />
+
+          <input
+            className="form-control mt-2"
+            placeholder="City *"
+            name="city"
+            value={newAddress.city}
+            onChange={handleChange}
+          />
+
+          <input
+            className="form-control mt-2"
+            placeholder="State *"
+            name="state"
+            value={newAddress.state}
+            onChange={handleChange}
+          />
+
+          <input
+            className="form-control mt-2"
+            placeholder="Pincode *"
+            name="pincode"
+            value={newAddress.pincode}
+            onChange={handleChange}
+          />
+
+        </div>
+
+        <div className="modal-footer">
           <button
-            type="button"
-            className="btn btn-success mt-3"
-            onClick={handleAddAddress}
-            disabled={!isFormValid}
+            className="btn btn-secondary"
+            onClick={() => setShowModal(false)}
           >
-            Add Address
+            Cancel
           </button>
-        )}
+
+          {editId ? (
+            <button
+              className="btn btn-primary"
+              onClick={async () => {
+                await handleUpdateAddress();
+                setShowModal(false);
+              }}
+              disabled={!isFormValid}
+            >
+              Update
+            </button>
+          ) : (
+            <button
+              className="btn btn-success"
+              onClick={async () => {
+                await handleAddAddress();
+                setShowModal(false);
+              }}
+              disabled={!isFormValid}
+            >
+              Add
+            </button>
+          )}
+        </div>
+
+      </div>
+    </div>
+  </div>
+)}
+     
 
         {/* ADDRESS LIST */}
         {addresses.length === 0 && (
@@ -318,7 +315,7 @@ const handlePlaceOrder = async () => {
             </div>
           </div>
         ))}
-      </div>
+      
 
       {/* PLACE ORDER */}
       <button
