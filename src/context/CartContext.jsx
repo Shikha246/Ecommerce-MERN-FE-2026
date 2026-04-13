@@ -45,6 +45,7 @@ export const CartProvider = ({ children }) => {
     );
 
     setCart(res.data.items);
+    setProducts(res.data.products);
     toast.success("Added successfully to cart");
 
   } catch (err) {
@@ -67,6 +68,7 @@ const removeFromCart = async (productId) => {
     );
 
     setCart(res.data.items);
+    setProducts(res.data.products);
   } catch (err) {
     console.error(err);
   }
@@ -85,6 +87,7 @@ const removeFromCart = async (productId) => {
     );
 
     setCart(res.data.items);
+    setProducts(res.data.products); // 🔥 sync listing page
     
   } catch (err) {
     console.error(err);

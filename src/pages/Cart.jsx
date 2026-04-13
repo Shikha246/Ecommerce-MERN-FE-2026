@@ -53,15 +53,15 @@ const isInWishlist = (wishlist || []).some(
                   </div>
 
                   {/* Item Total */}
-                  <div className="card mt-3 p-3">
+                  {/* <div className="card mt-3 p-3">
                     <p>
                       <strong>Total:</strong> ₹{item.price} × {item.qty} = ₹
                       {item.price * item.qty}
                     </p>
-                  </div>
+                  </div> */}
 
-                  {/* Stock */}
-                  <p>In Stock: {(item.stock || 0) - item.qty}</p>
+                  {/* Quantity */}
+                  <p>Quantity:{item.qty}</p>
 
                   {/* Actions */}
                   <button

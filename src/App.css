@@ -1,7 +1,7 @@
 body {
   margin: 0;
   background-color:rgba(208, 176, 128, 0.852) !important;
-  height: 100%;
+  min-height: 100%;
 }
 
 #root {
@@ -14,7 +14,7 @@ a {
   text-decoration: none;
 }
 html {
-    height: 100%;
+    min-height: 100%;
 }
 
 /* The hero image */
@@ -24,7 +24,7 @@ html {
 
   /* Set a specific height */
   height: 100vh;
-  /* overflow:hidden; */
+  
 
   /* Position and center the image to scale nicely on all screens */
   background-position: center;

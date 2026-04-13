@@ -33,7 +33,7 @@ export const WishlistProvider = ({ children }) => {
   // ✅ ADD to wishlist
   const addToWishlist = async (product) => {
   try {
-   debugger;
+  //  debugger;
     console.log("This is add to wishlist button click",product);
     const res = await axios.post(
       "https://ecommerce-mern-be-2026.vercel.app/api/wishlist/add",

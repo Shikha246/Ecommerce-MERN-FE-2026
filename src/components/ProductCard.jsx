@@ -19,7 +19,14 @@ const isInCart = cart.some(
 const isInWishlist = wishlist?.some(
   (id) => id.toString() === product._id.toString()
 );
+const cartItem = cart.find(
+  item => item.productId === product._id.toString()
+);
 
+const quantityInCart = cartItem ? cartItem.qty : 0;
+
+// 🔥 Dynamic stock
+const availableStock = product.stock - quantityInCart;
 
   return (
     <div className="card w-100 h-100 d-flex flex-column">
@@ -34,7 +41,7 @@ const isInWishlist = wishlist?.some(
         <h6>{product.name}</h6>
         <p>₹{product.price}</p>
         {!isWishlistPage && <p>⭐ {product.rating}</p>}
-        <p>In Stock:{product.stock}</p>
+        <p>In Stock: {availableStock}</p>
 {/* Add to Cart (ONLY for product listing) */}
 
 <div className="d-flex flex-wrap gap-2 mt-2">
@@ -43,9 +50,10 @@ const isInWishlist = wishlist?.some(
     <button
       className="btn btn-primary btn-sm flex-fill responsive-btn"
       onClick={() => addToCart(product)}
-      disabled={isInCart}
+      disabled={isInCart || availableStock === 0}
     >
-      {isInCart ? "In Cart" : "Add to Cart"}
+      {availableStock === 0 ? "Out of Stock" : isInCart ? "In Cart" : "Add to Cart"}
+      {/* {isInCart ? "In Cart" : "Add to Cart"} */}
     </button>
   )}
 
