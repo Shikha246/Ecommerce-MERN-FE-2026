@@ -40,7 +40,7 @@ useEffect(() => {
 
   return (
     <>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-2">
 
       <div className="container-fluid">
 
@@ -61,89 +61,67 @@ useEffect(() => {
         </button>
 
         {/* Navbar Content */}
-        <div className="collapse navbar-collapse" id="navbarContent">
+        <div className="collapse navbar-collapse align-items-start text-start" id="navbarContent">
 
           {/* Search Bar */}
-          <form className="d-flex mx-auto w-50" onSubmit={onSearchClicked}>
+          <form className="d-flex flex-column flex-lg-row mx-lg-auto my-2" style={{ maxWidth: "600px", width: "100%" }} onSubmit={onSearchClicked}>
             <input
-  className="form-control me-2"
+  className="form-control w-100 mb-2 mb-lg-0 me-lg-2"
   type="search"
   placeholder="Search books..."
   value={searchValue}
-  onChange={(e) => setSearchValue(e.target.value)} 
+  onChange={(e) => setSearchValue(e.target.value)}
 />
 
-            <button className="btn btn-outline-light">
-              Search
-            </button>
+
+            <button className="btn btn-outline-light w-20 w-lg-auto">
+  Search
+</button>
      {searchValue && (
-  <button onClick={() => {
+  <button
+  type="button"
+  className="btn btn-outline-light mt-2 mt-lg-0"
+  onClick={() => {
     setSearchValue("");
     navigate("/products");
-  }}>
-    ❌
-  </button>
+  }}
+>
+  ❌
+</button>
 )}
           </form>
           
 
           {/* Navigation Links */}
-          {/* <div className="navbar-nav">
+          <ul className="navbar-nav ms-lg-auto flex-column flex-lg-row align-items-start align-items-lg-center">
 
-            <Link className="btn btn-outline-light mx-2"  to="/products">
-              Products
-              
-            </Link>
-
-            <Link className="btn btn-outline-light mx-2" to="/wishlist">
-              Wishlist 
-
-  
-  <span className="translate-middle badge rounded-pill bg-danger">
-  {wishlist.length}
-</span>
-            </Link>
-
-            <Link className="btn btn-outline-light mx-2" to="/cart">
-              Cart
-              <span class="translate-middle badge rounded-pill bg-danger">
-  {cart.length}
-</span>
-            </Link>
-
-            <Link className="btn btn-outline-light mx-2" to="/profile">
-              Profile
-            </Link>
-
-          </div> */}
-          <ul className="navbar-nav ms-auto">
-
-  <li className="nav-item">
-    <Link className="nav-link" to="/products">
+  <li className="nav-item w-100 text-start">
+    <Link className="nav-link w-100 text-start me-2" to="/products">
       Products
     </Link>
   </li>
 
-  <li className="nav-item">
-    <Link className="nav-link" to="/wishlist">
+  <li className="nav-item w-100 text-start">
+    <Link className="nav-link w-100 text-start me-2 text-nowrap" to="/wishlist">
+    
       Wishlist
-      <span className="badge bg-danger ms-1">
+      <span className="badge bg-danger ms-2">
         {wishlist.length}
       </span>
     </Link>
   </li>
 
-  <li className="nav-item">
-    <Link className="nav-link" to="/cart">
+  <li className="nav-item w-100 text-start">
+    <Link className="nav-link w-100 text-start me-2 text-nowrap" to="/cart">
       Cart
-      <span className="badge bg-danger ms-1">
+      <span className="badge bg-danger ms-2">
         {cart.length}
       </span>
     </Link>
   </li>
 
-  <li className="nav-item">
-    <Link className="nav-link" to="/profile">
+  <li className="nav-item w-100 text-start">
+    <Link className="nav-link w-100 text-start me-2" to="/profile">
       Profile
     </Link>
   </li>

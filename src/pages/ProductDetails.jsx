@@ -25,7 +25,7 @@ const isInWishlist = wishlist?.some(
 );
   return(
 
-    <div className="container mt-4">
+    <div className="container productDetailContainer mt-4">
       
 <div className="row">
   <div className="card">
@@ -33,12 +33,12 @@ const isInWishlist = wishlist?.some(
 
       <img src={product.image} width="200" height="200" className="img-fluid"/>
 
-      <p className="text-muted" style={{fontSize:10}}>{product.description}</p>
+      <p className="text-muted" style={{fontSize:20}}>{product.description}</p>
 
-      <p style={{fontSize:20}}><strong>Price:</strong> ₹{product.price}</p>
+      <p style={{fontSize:15}}><strong>Price:</strong> ₹{product.price}</p>
 
-      <p style={{fontSize:20}}><strong>Rating:</strong> ⭐ {product.rating}</p>
-      <p style={{fontSize:20}}><strong>In Stock:</strong> {product.stock}</p>
+      <p style={{fontSize:15}}><strong>Rating:</strong> ⭐ {product.rating}</p>
+      <p style={{fontSize:15}}><strong>In Stock:</strong> {product.stock}</p>
 
 <div className="d-flex flex-wrap gap-2 mt-2">
 

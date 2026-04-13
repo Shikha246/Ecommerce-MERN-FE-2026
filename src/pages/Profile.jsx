@@ -319,7 +319,7 @@ const handlePlaceOrder = async () => {
 
       {/* PLACE ORDER */}
       <button
-        className="btn btn-success mb-3"
+        className="btn btn-success m-3 "
         onClick={handlePlaceOrder}
       >
         Place Order

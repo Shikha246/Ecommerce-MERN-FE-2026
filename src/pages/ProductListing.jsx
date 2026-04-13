@@ -3,47 +3,60 @@ import ProductCard from "../components/ProductCard";
 import Filters from "../components/Filters";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-
+import { useState } from "react";
 function ProductListing(){
 // debugger;
   const { products,setProducts } = useProducts();
+
   const location = useLocation();
- const queryParams = new URLSearchParams(location.search);
+ 
+  const [filters, setFilters] = useState({
+    category: [],
+    sort: "",
+    rating: 0
+  });
+ 
+  const queryParams = new URLSearchParams(location.search);
 const category = queryParams.get("category");
 const searchQuery = queryParams.get("search") || "";
 
-const filteredProducts = products.filter(product => {
-  const matchesCategory = category
-    ? product.category.toLowerCase() === category.toLowerCase()
-    : true;
+const filteredProducts = products
+  .filter(product => {
+    // URL category filter
+    const matchesURLCategory = category
+      ? product.category.toLowerCase() === category.toLowerCase()
+      : true;
 
-  const matchesSearch = searchQuery
-    ? product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    : true;
+    // Search filter
+    const matchesSearch = searchQuery
+      ? product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      : true;
 
-  return matchesCategory && matchesSearch;
+    // Sidebar category filter
+    const matchesFilterCategory =
+      filters.category.length === 0 ||
+      filters.category.includes(product.category);
 
-});
+    // Rating filter
+    const matchesRating =
+      product.rating >= filters.rating;
 
-// if(category != null){
-//   ApplyFilter(category);
-// }
+    return (
+      matchesURLCategory &&
+      matchesSearch &&
+      matchesFilterCategory &&
+      matchesRating
+    );
+  })
+  .sort((a, b) => {
+    if (filters.sort === "lowToHigh") return a.price - b.price;
+    if (filters.sort === "highToLow") return b.price - a.price;
+    return 0;
+  });
 
-useEffect(() => {
-  if (category) {
-    ApplyFilter(category);
-  }
-}, [category]);
 
- function ApplyFilter(category)  {
-    // debugger;
-console.log(products);
-// let filteredProducts = products.filter(x => x.category.toLowerCase() == category);
-// console.log(filteredProducts); 
 
-// setProducts(filteredProducts);
-
-  }
+ 
 
   return(
 
@@ -52,15 +65,15 @@ console.log(products);
       <div className="row">
 {/* FILTER SIDEBAR */}
         <div className="col-md-3">
-          <div className="sticky-filter">
-          <Filters />
+          <div className="sticky-filter mb-2">
+          <Filters filters={filters} setFilters={setFilters} />
           </div>
         </div>
 {/* PRODUCTS */}
         <div className="col-md-9">
       <div className="row">
         {filteredProducts.map(product => (
-          <div className="col-6 col-sm-4 col-md-3 col-lg-3 mb-3 d-flex justify-content-center" key={product._id}>
+          <div className="col-12 col-sm-12 col-md-3 col-lg-3 mb-3 d-flex justify-content-center" key={product._id}>
             <ProductCard product={product} />
           </div>
         ))}
