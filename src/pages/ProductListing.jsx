@@ -17,15 +17,23 @@ function ProductListing(){
   });
  
   const queryParams = new URLSearchParams(location.search);
-const category = queryParams.get("category");
+// const category = queryParams.get("category");
+const categoryFromURL = queryParams.get("category");
 const searchQuery = queryParams.get("search") || "";
-
+useEffect(() => {
+  if (categoryFromURL) {
+    setFilters(prev => ({
+      ...prev,
+      category: [categoryFromURL]
+    }));
+  }
+}, [categoryFromURL]);
 const filteredProducts = products
   .filter(product => {
     // URL category filter
-    const matchesURLCategory = category
-      ? product.category.toLowerCase() === category.toLowerCase()
-      : true;
+    // const matchesURLCategory = category
+    //   ? product.category.toLowerCase() === category.toLowerCase()
+    //   : true;
 
     // Search filter
     const matchesSearch = searchQuery
@@ -35,14 +43,14 @@ const filteredProducts = products
     // Sidebar category filter
     const matchesFilterCategory =
       filters.category.length === 0 ||
-      filters.category.includes(product.category);
+      filters.category.includes(product.category.toLowerCase());
 
     // Rating filter
     const matchesRating =
       product.rating >= filters.rating;
 
     return (
-      matchesURLCategory &&
+      // matchesURLCategory &&
       matchesSearch &&
       matchesFilterCategory &&
       matchesRating

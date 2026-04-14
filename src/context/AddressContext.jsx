@@ -41,7 +41,7 @@ export const AddressProvider = ({ children }) => {
       );
 
       setAddresses(normalizeAddressesPayload(res.data));
-      console.log("FETCH RESPONSE:", res.data); 
+      // console.log("FETCH RESPONSE:", res.data); 
 
     } catch (err) {
       console.error(err);

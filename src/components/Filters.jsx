@@ -130,8 +130,8 @@ function Filters({ filters, setFilters }) {
         <input
         className="me-2"
           type="checkbox"
-          value="Fiction"
-          checked={filters.category.includes("Fiction")}
+          value="fiction"
+          checked={filters.category.includes("fiction")}
           onChange={(e) => {
     const value = e.target.value;
 
@@ -150,8 +150,8 @@ function Filters({ filters, setFilters }) {
         <input
         className="me-2"
           type="checkbox"
-          value="Self-Help"
-          checked={filters.category.includes("Self-Help")}
+          value="self-help"
+          checked={filters.category.includes("self-help")}
           onChange={(e) => {
     const value = e.target.value;
 
@@ -171,8 +171,8 @@ function Filters({ filters, setFilters }) {
         <input
         className="me-2"
           type="checkbox"
-          value="Finance"
-          checked={filters.category.includes("Finance")}
+          value="finance"
+          checked={filters.category.includes("finance")}
           onChange={(e) => {
     const value = e.target.value;
 
@@ -191,8 +191,8 @@ function Filters({ filters, setFilters }) {
         <input
         className="me-2"
           type="checkbox"
-          value="Programming"
-          checked={filters.category.includes("Programming")}
+          value="programming"
+          checked={filters.category.includes("programming")}
           onChange={(e) => {
     const value = e.target.value;
 
