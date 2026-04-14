@@ -67,7 +67,12 @@ html {
 .bgColor{
   background-color:rgba(208, 176, 128, 0.852) !important; 
 }
+
 .card {
+  display:flex;
+  flex-direction: column;
+  height:100%;
+  
   border-radius: 10px;
   transition: transform 0.2s ease;
 }
@@ -132,4 +137,17 @@ html {
 }
 .productDetailContainer{
   padding-bottom:100px;
+}
+/* Default (normal size) */
+.product-img {
+  height: 160px;
+  /* object-fit: cover; */
+}
+
+/* When screen width ≤ 743px */
+@media (max-width: 760px) {
+  .product-img {
+    height: 110px;
+    padding: 20px !important;
+  }
 }

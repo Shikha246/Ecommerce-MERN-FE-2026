@@ -33,7 +33,7 @@ const availableStock = product.stock - quantityInCart;
 
       <Link to={`/product/${product._id}`}>
       {/* ,objectFit:"cover" */}
-        <img src={product.image} className="card-img-top img-fluid" style={{height:"160px"}} alt="product" />
+        <img src={product.image} className="card-img-top img-fluid product-img" style={{height:"160px"}} alt="product" />
       </Link>
 
       <div className="card-body d-flex flex-column">
@@ -44,7 +44,7 @@ const availableStock = product.stock - quantityInCart;
         <p>In Stock: {availableStock}</p>
 {/* Add to Cart (ONLY for product listing) */}
 
-<div className="d-flex flex-wrap gap-2 mt-2">
+<div className="d-flex flex-wrap gap-2 mt-auto pt-2">
 
   {!isWishlistPage && (
     <button
