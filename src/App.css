@@ -141,13 +141,16 @@ html {
 /* Default (normal size) */
 .product-img {
   height: 160px;
-  /* object-fit: cover; */
+  object-fit: cover;
 }
 
-/* When screen width ≤ 743px */
+/* When screen width ≤ 760px */
 @media (max-width: 760px) {
   .product-img {
     height: 110px;
-    padding: 20px !important;
+    padding: 30px !important;
   }
+}
+.mainContent{
+  margin-top: 250px;
 }

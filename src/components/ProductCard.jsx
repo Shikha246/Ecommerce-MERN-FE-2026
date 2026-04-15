@@ -33,7 +33,7 @@ const availableStock = product.stock - quantityInCart;
 
       <Link to={`/product/${product._id}`}>
       {/* ,objectFit:"cover" */}
-        <img src={product.image} className="card-img-top img-fluid product-img" style={{height:"160px"}} alt="product" />
+        <img src={product.image} className="card-img-top img-fluid product-img"  alt="product" />
       </Link>
 
       <div className="card-body d-flex flex-column">
