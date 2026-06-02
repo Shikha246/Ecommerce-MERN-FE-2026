@@ -8,13 +8,17 @@ This platform enables users to browse products, manage wishlists, place orders, 
 
 ## 🔗 Live Demo
 
-### Frontend
+### [Frontend Link](https://ecommerce-mern-fe-2026.vercel.app/)
 
-https://ecommerce-mern-fe-2026.vercel.app/
+---
 
-### GitHub Repository
+## 🎥 Demo Video
 
-https://github.com/Shikha246/Ecommerce-MERN-FE-2026
+Watch a walkthrough of all major features of the application:
+
+[Watch Demo Video](https://drive.google.com/file/d/1gXVZZtDEOhSnuppUasKE7D40FErspyMY/view?usp=sharing)
+
+
 
 ---
 
@@ -384,31 +388,6 @@ Replace `your_mongodb_connection_string` with your MongoDB Atlas connection stri
 }
 ```
 
----
-
-## 📂 Project Structure
-
-```bash
-backend/
-│
-├── models/
-│   ├── Product.models.js
-│   ├── Category.models.js
-│   ├── Wishlist.models.js
-│   └── Order.models.js
-│
-├── routes/
-│   ├── Product.routes.js
-│   ├── Category.routes.js
-│   ├── Wishlist.routes.js
-│   └── Order.routes.js
-│
-├── server.js
-├── package.json
-└── .env
-```
-
----
 
 ## 🚀 Future Enhancements
 
