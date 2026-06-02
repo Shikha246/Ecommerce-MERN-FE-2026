@@ -4,13 +4,11 @@ A modern and responsive E-commerce web application built using the MERN stack. T
 
 ## 🌐 Live Demo
 
-🚀 **Live Website:**  
-https://ecommerce-mern-fe-2026.vercel.app/
+🚀 [**Live Website:**](https://ecommerce-mern-fe-2026.vercel.app/)
 
 ## 📂 GitHub Repository
 
-💻 **Source Code:**  
-https://github.com/Shikha246/Ecommerce-MERN-FE-2026
+💻 [**Source Code:**](https://github.com/Shikha246/Ecommerce-MERN-FE-2026)
 
 ---
 
