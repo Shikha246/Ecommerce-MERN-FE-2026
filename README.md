@@ -1,65 +1,36 @@
-# 🛍️ Ecommerce MERN Frontend
+# 🛍️ Ecommerce MERN Application
 
-A modern and responsive E-commerce web application built using the MERN stack. This project provides users with a seamless online shopping experience including product browsing, searching, cart management, user authentication, and order management.
+A full-stack Ecommerce application built using the MERN stack.
 
-## Live Demo
-
-🚀 [**Live Website:**](https://ecommerce-mern-fe-2026.vercel.app/)
-
-## Watch Video
-
-💻 [**Video Link:**](https://drive.google.com/file/d/1gXVZZtDEOhSnuppUasKE7D40FErspyMY/view?usp=sharing)
+This platform enables users to browse products, manage wishlists, place orders, and enjoy a seamless online shopping experience through a responsive and user-friendly interface.
 
 ---
 
-## 📖 Overview
+## 🔗 Live Demo
 
-This application serves as the frontend of a full-stack E-commerce platform. It allows users to:
+### Frontend
 
-- Browse products
-- Search products
-- View product details
-- Add items to cart
-- Manage cart items
-- Register and login securely
-- Place orders
-- View order history
-- Manage user profiles
+https://ecommerce-mern-fe-2026.vercel.app/
 
-The project focuses on delivering a responsive, intuitive, and user-friendly shopping experience across all devices.
+### GitHub Repository
+
+https://github.com/Shikha246/Ecommerce-MERN-FE-2026
 
 ---
 
-## ✨ Features
+## ⚡ Quick Start
 
-### 👤 User Features
+Clone the repository and run the project locally.
 
-- Product Listing
-- Product Details Page
-- Product Search
-- Category Filtering
-- Shopping Cart Management
-- Checkout Flow
-- Order History
-- Responsive Design
+```bash
+git clone https://github.com/Shikha246/Ecommerce-MERN-FE-2026.git
 
-### 🛒 Shopping Features
+cd Ecommerce-MERN-FE-2026
 
-- Add to Cart
-- Remove from Cart
-- Update Product Quantity
-- Product Images & Descriptions
-- Price Display
-- Order Summary
+npm install
 
-### 🎨 UI Features
-
-- Responsive Layout
-- Modern User Interface
-- Loading Indicators
-- Toast Notifications
-- Protected Routes
-- Error Handling
+npm run dev
+```
 
 ---
 
@@ -67,118 +38,407 @@ The project focuses on delivering a responsive, intuitive, and user-friendly sho
 
 ### Frontend
 
-- React.js
-- React Router DOM
-- Context API
-- Axios
-- CSS3
-- JavaScript (ES6+)
+* React.js
+* React Router DOM
+* Context API
+* Axios
+* React Toastify
+* CSS3
 
 ### Backend
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
+* Node.js
+* Express.js
 
+### Database
 
+* MongoDB
+* Mongoose
+
+### Development Tools
+
+* Vite
+* Git & GitHub
+* Postman
+
+### Additional Libraries Used
+
+| Library          | Purpose                                |
+| ---------------- | -------------------------------------- |
+| Axios            | Handles API communication              |
+| React Router DOM | Client-side routing                    |
+| React Toastify   | User notifications                     |
+| Express          | Backend server framework               |
+| Mongoose         | MongoDB ODM                            |
+| dotenv           | Environment variable management        |
+| cors             | Cross-origin resource sharing          |
+| nodemon          | Auto server restart during development |
 
 ---
 
-## ⚙️ Installation
+## ✨ Features
 
-### Clone Repository
+### 🛍️ Product Management
 
-```bash
-git clone https://github.com/Shikha246/Ecommerce-MERN-FE-2026.git
+* View all products
+* View product details
+* Add products to database
+* Browse products by category
 
-cd Ecommerce-MERN-FE-2026
-```
+### ❤️ Wishlist Management
 
-### Install Dependencies
+* Add products to wishlist
+* Remove products from wishlist
+* View saved wishlist products
+* Prevent duplicate wishlist entries
 
-```bash
-npm install
-```
+### 📦 Order Management
 
-### Create Environment Variables
+* Place orders
+* Store shipping information
+* View order history
+* Track customer purchases
 
-Create a `.env` file in the root directory:
+### 📂 Category Management
+
+* Fetch all categories
+* View category details
+
+### 📱 Responsive UI
+
+* Mobile-friendly design
+* Tablet responsive
+* Desktop optimized
+
+### 🔗 REST API Integration
+
+* Connected frontend and backend
+* Full CRUD operations
+* MongoDB persistence
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the backend directory:
 
 ```env
-VITE_API_URL=your_backend_api_url
+MONGODB=your_mongodb_connection_string
+PORT=5000
 ```
 
-### Run Development Server
+Replace `your_mongodb_connection_string` with your MongoDB Atlas connection string.
 
-```bash
-npm run dev
-```
+---
 
-Application will start on:
+# 📡 API Reference
 
-```bash
-http://localhost:5173
+---
+
+# 🛍️ Product APIs
+
+## Get All Products
+
+### Request
+
+`GET /api/products`
+
+### Response
+
+```json
+{
+  "data": {
+    "products": [
+      {
+        "_id": "6846e6b9f5c8b71234567890",
+        "title": "Men's Running Shoes",
+        "price": 2499,
+        "category": "Footwear"
+      }
+    ]
+  }
+}
 ```
 
 ---
 
+## Get Product By ID
 
+### Request
 
-## 📱 Responsive Design
+`GET /api/products/:productId`
 
-Optimized for:
+### Response
 
-- Desktop
-- Laptop
-- Tablet
-- Mobile Devices
+```json
+{
+  "data": {
+    "product": {
+      "_id": "6846e6b9f5c8b71234567890",
+      "title": "Men's Running Shoes",
+      "price": 2499,
+      "description": "Comfortable running shoes"
+    }
+  }
+}
+```
 
 ---
 
-## 🎯 Future Enhancements
+## Create Product
 
-- Wishlist Functionality
-- Product Reviews & Ratings
-- Payment Gateway Integration
-- Order Tracking
-- Admin Dashboard
-- Coupon & Discount System
-- Product Recommendations
+### Request
+
+`POST /api/products`
+
+```json
+{
+  "title": "Wireless Headphones",
+  "price": 3999,
+  "category": "Electronics",
+  "description": "Noise cancelling headphones"
+}
+```
+
+### Response
+
+```json
+{
+  "message": "Product added successfully",
+  "data": {
+    "product": {
+      "_id": "6846e6b9f5c8b71234567890",
+      "title": "Wireless Headphones",
+      "price": 3999
+    }
+  }
+}
+```
+
 ---
 
-## 🤝 Contributing
+# ❤️ Wishlist APIs
 
-Contributions are welcome!
+## Get Wishlist
 
-1. Fork the repository
-2. Create a feature branch
+### Request
 
-```bash
-git checkout -b feature-name
+`GET /wishlist/:userId`
+
+### Response
+
+```json
+{
+  "products": [
+    "6846e6b9f5c8b71234567890",
+    "6846e7a2f5c8b71234567891"
+  ]
+}
 ```
 
-3. Commit your changes
+---
 
-```bash
-git commit -m "Added new feature"
+## Add Product To Wishlist
+
+### Request
+
+`POST /wishlist/add`
+
+```json
+{
+  "userId": "12345",
+  "productId": "6846e6b9f5c8b71234567890"
+}
 ```
 
-4. Push to the branch
+### Response
 
-```bash
-git push origin feature-name
+```json
+{
+  "products": [
+    "6846e6b9f5c8b71234567890"
+  ]
+}
 ```
 
-5. Open a Pull Request
+---
+
+## Remove Product From Wishlist
+
+### Request
+
+`DELETE /wishlist/remove/:userId/:productId`
+
+### Response
+
+```json
+{
+  "products": []
+}
+```
+
+---
+
+# 📦 Order APIs
+
+## Place Order
+
+### Request
+
+`POST /orders/place`
+
+```json
+{
+  "userId": "12345",
+  "items": [
+    {
+      "productId": "6846e6b9f5c8b71234567890",
+      "quantity": 2
+    }
+  ],
+  "address": "Pune, Maharashtra",
+  "total": 4998
+}
+```
+
+### Response
+
+```json
+{
+  "_id": "6852e6b9f5c8b71234999999",
+  "userId": "12345",
+  "total": 4998,
+  "address": "Pune, Maharashtra",
+  "createdAt": "2026-06-01T10:30:15.123Z"
+}
+```
+
+---
+
+## Get User Orders
+
+### Request
+
+`GET /orders/:userId`
+
+### Response
+
+```json
+[
+  {
+    "_id": "6852e6b9f5c8b71234999999",
+    "total": 4998,
+    "address": "Pune, Maharashtra",
+    "createdAt": "2026-06-01T10:30:15.123Z"
+  }
+]
+```
+
+---
+
+# 📂 Category APIs
+
+## Get All Categories
+
+### Request
+
+`GET /api/categories`
+
+### Response
+
+```json
+{
+  "data": {
+    "categories": [
+      {
+        "_id": "123",
+        "categoryName": "Electronics"
+      },
+      {
+        "_id": "124",
+        "categoryName": "Footwear"
+      }
+    ]
+  }
+}
+```
+
+---
+
+## Get Category By ID
+
+### Request
+
+`GET /api/categories/:categoryId`
+
+### Response
+
+```json
+{
+  "data": {
+    "category": {
+      "_id": "123",
+      "categoryName": "Electronics"
+    }
+  }
+}
+```
+
+---
+
+## 📂 Project Structure
+
+```bash
+backend/
+│
+├── models/
+│   ├── Product.models.js
+│   ├── Category.models.js
+│   ├── Wishlist.models.js
+│   └── Order.models.js
+│
+├── routes/
+│   ├── Product.routes.js
+│   ├── Category.routes.js
+│   ├── Wishlist.routes.js
+│   └── Order.routes.js
+│
+├── server.js
+├── package.json
+└── .env
+```
+
+---
+
+## 🚀 Future Enhancements
+
+* User Authentication
+* Payment Gateway Integration
+* Product Reviews & Ratings
+* Admin Dashboard
+* Coupon Management
+* Order Tracking
+* Inventory Management
+
+---
+
+## 📬 Contact
+
+For bugs, issues, or feature requests, feel free to reach out:
+
+📧 **[ramrakhyani.shikha@gmail.com](mailto:ramrakhyani.shikha@gmail.com)**
 
 ---
 
 ## 👩‍💻 Author
 
-### Shikha Ramrakhyani
+Built with ❤️ by **Shikha Ramrakhyani**
+
+GitHub:
+https://github.com/Shikha246
 
 ---
 
+## ⭐ Support
 
-⭐ If you found this project useful, please consider giving it a star on GitHub!
+If you found this project useful, consider giving it a star on GitHub.
