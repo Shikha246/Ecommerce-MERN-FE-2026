@@ -1,16 +1,253 @@
-# React + Vite
+# 🛍️ Ecommerce MERN Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive E-commerce web application built using the MERN stack. This project provides users with a seamless online shopping experience including product browsing, searching, cart management, user authentication, and order management.
 
-Currently, two official plugins are available:
+## 🌐 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 **Live Website:**  
+https://ecommerce-mern-fe-2026.vercel.app/
 
-## React Compiler
+## 📂 GitHub Repository
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+💻 **Source Code:**  
+https://github.com/Shikha246/Ecommerce-MERN-FE-2026
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📖 Overview
+
+This application serves as the frontend of a full-stack E-commerce platform. It allows users to:
+
+- Browse products
+- Search products
+- View product details
+- Add items to cart
+- Manage cart items
+- Register and login securely
+- Place orders
+- View order history
+- Manage user profiles
+
+The project focuses on delivering a responsive, intuitive, and user-friendly shopping experience across all devices.
+
+---
+
+## ✨ Features
+
+### 👤 User Features
+
+- User Registration & Login
+- JWT Authentication
+- Product Listing
+- Product Details Page
+- Product Search
+- Category Filtering
+- Shopping Cart Management
+- Checkout Flow
+- Order History
+- Responsive Design
+
+### 🛒 Shopping Features
+
+- Add to Cart
+- Remove from Cart
+- Update Product Quantity
+- Product Images & Descriptions
+- Price Display
+- Order Summary
+
+### 🎨 UI Features
+
+- Responsive Layout
+- Modern User Interface
+- Loading Indicators
+- Toast Notifications
+- Protected Routes
+- Error Handling
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React.js
+- React Router DOM
+- Redux Toolkit / Context API
+- Axios
+- CSS3
+- JavaScript (ES6+)
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+
+---
+
+## 📁 Project Structure
+
+```bash
+src/
+│
+├── assets/
+├── components/
+├── pages/
+├── redux/
+├── routes/
+├── services/
+├── utils/
+│
+├── App.jsx
+├── main.jsx
+└── index.css
+```
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Shikha246/Ecommerce-MERN-FE-2026.git
+
+cd Ecommerce-MERN-FE-2026
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Create Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_API_URL=your_backend_api_url
+```
+
+### Run Development Server
+
+```bash
+npm run dev
+```
+
+Application will start on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+## 🚀 Build for Production
+
+```bash
+npm run build
+```
+
+Preview production build:
+
+```bash
+npm run preview
+```
+
+---
+
+## 🔒 Authentication
+
+This application uses JWT-based authentication for:
+
+- User Registration
+- User Login
+- Protected Routes
+- Secure API Requests
+
+---
+
+## 📱 Responsive Design
+
+Optimized for:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile Devices
+
+---
+
+## 🎯 Future Enhancements
+
+- Wishlist Functionality
+- Product Reviews & Ratings
+- Payment Gateway Integration
+- Order Tracking
+- Admin Dashboard
+- Coupon & Discount System
+- Product Recommendations
+
+---
+
+## 📸 Screenshots
+
+Add screenshots of your application here:
+
+```md
+![Home Page](./screenshots/home.png)
+
+![Product Details](./screenshots/product-details.png)
+
+![Cart Page](./screenshots/cart.png)
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Added new feature"
+```
+
+4. Push to the branch
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
+
+---
+
+## 👩‍💻 Author
+
+### Shikha Ramrakhyani
+
+- GitHub: https://github.com/Shikha246
+- Portfolio: https://ecommerce-mern-fe-2026.vercel.app/
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+⭐ If you found this project useful, please consider giving it a star on GitHub!
