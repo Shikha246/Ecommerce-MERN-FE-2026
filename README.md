@@ -2,13 +2,13 @@
 
 A modern and responsive E-commerce web application built using the MERN stack. This project provides users with a seamless online shopping experience including product browsing, searching, cart management, user authentication, and order management.
 
-## 🌐 Live Demo
+## Live Demo
 
 🚀 [**Live Website:**](https://ecommerce-mern-fe-2026.vercel.app/)
 
-## 📂 GitHub Repository
+## Watch Video
 
-💻 [**Source Code:**](https://github.com/Shikha246/Ecommerce-MERN-FE-2026)
+💻 [**Video Link:**](https://drive.google.com/file/d/1gXVZZtDEOhSnuppUasKE7D40FErspyMY/view?usp=sharing)
 
 ---
 
@@ -34,8 +34,6 @@ The project focuses on delivering a responsive, intuitive, and user-friendly sho
 
 ### 👤 User Features
 
-- User Registration & Login
-- JWT Authentication
 - Product Listing
 - Product Details Page
 - Product Search
@@ -71,7 +69,7 @@ The project focuses on delivering a responsive, intuitive, and user-friendly sho
 
 - React.js
 - React Router DOM
-- Redux Toolkit / Context API
+- Context API
 - Axios
 - CSS3
 - JavaScript (ES6+)
@@ -82,27 +80,8 @@ The project focuses on delivering a responsive, intuitive, and user-friendly sho
 - Express.js
 - MongoDB
 - Mongoose
-- JWT Authentication
 
----
 
-## 📁 Project Structure
-
-```bash
-src/
-│
-├── assets/
-├── components/
-├── pages/
-├── redux/
-├── routes/
-├── services/
-├── utils/
-│
-├── App.jsx
-├── main.jsx
-└── index.css
-```
 
 ---
 
@@ -144,30 +123,7 @@ http://localhost:5173
 
 ---
 
-## 🚀 Build for Production
 
-```bash
-npm run build
-```
-
-Preview production build:
-
-```bash
-npm run preview
-```
-
----
-
-## 🔒 Authentication
-
-This application uses JWT-based authentication for:
-
-- User Registration
-- User Login
-- Protected Routes
-- Secure API Requests
-
----
 
 ## 📱 Responsive Design
 
@@ -189,21 +145,6 @@ Optimized for:
 - Admin Dashboard
 - Coupon & Discount System
 - Product Recommendations
-
----
-
-## 📸 Screenshots
-
-Add screenshots of your application here:
-
-```md
-![Home Page](./screenshots/home.png)
-
-![Product Details](./screenshots/product-details.png)
-
-![Cart Page](./screenshots/cart.png)
-```
-
 ---
 
 ## 🤝 Contributing
@@ -237,15 +178,7 @@ git push origin feature-name
 
 ### Shikha Ramrakhyani
 
-- GitHub: https://github.com/Shikha246
-- Portfolio: https://ecommerce-mern-fe-2026.vercel.app/
-
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
 
 ⭐ If you found this project useful, please consider giving it a star on GitHub!
