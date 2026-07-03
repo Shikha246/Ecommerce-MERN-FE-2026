@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 
@@ -10,6 +10,8 @@ import Wishlist from "./pages/Wishlist";
 import Profile from "./pages/Profile";
 import Address from "./pages/Address";
 import Checkout from "./pages/Checkout";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,37 +22,77 @@ import { AddressProvider } from "./context/AddressContext";
 import { OrderProvider } from "./context/OrderContext";
 import Footer from "./components/Footer";
 
-function App() {
+// Wrapper for Routes that REQUIRE a user to be logged in
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("token");
+  return token ? children : <Navigate to="/login" replace />;
+}
 
+// Wrapper for Routes that are ONLY for logged-out users (Login & Signup)
+function PublicRoute({ children }) {
+  const token = localStorage.getItem("token");
+  return !token ? children : <Navigate to="/" replace />;
+}
+
+function App() {
   return (
     <BrowserRouter>
       <ProductProvider>
-      <CartProvider>
-      <WishlistProvider>
-      <AddressProvider>
-      <OrderProvider>
-        <Navbar />
-        <ToastContainer />
-        <Routes>
+        <CartProvider>
+          <WishlistProvider>
+            <AddressProvider>
+              <OrderProvider>
+                <Navbar />
+                <ToastContainer />
+                
+                <Routes>
+                  {/* ==============================================
+                      PROTECTED ROUTES (Must log in to see)
+                     ============================================== */}
+                  <Route 
+                    path="/" 
+                    element={<ProtectedRoute><Home /></ProtectedRoute>} 
+                  />
+                  <Route 
+                    path="/profile" 
+                    element={<ProtectedRoute><Profile /></ProtectedRoute>} 
+                  />
+                  <Route 
+                    path="/checkout" 
+                    element={<ProtectedRoute><Checkout /></ProtectedRoute>} 
+                  />
 
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<ProductListing />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/address" element={<Address />} />
-          <Route path="/checkout" element={<Checkout />} />
+                  {/* ==============================================
+                      PUBLIC-ONLY ROUTES (Hidden if logged in)
+                     ============================================== */}
+                  <Route 
+                    path="/login" 
+                    element={<PublicRoute><Login /></PublicRoute>} 
+                  />
+                  <Route 
+                    path="/signup" 
+                    element={<PublicRoute><Signup /></PublicRoute>} 
+                  />
 
-        </Routes>
+                  {/* ==============================================
+                      OPEN ROUTES (Anyone can view anytime)
+                     ============================================== */}
+                  <Route path="/products" element={<ProductListing />} />
+                  <Route path="/product/:id" element={<ProductDetails />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/wishlist" element={<Wishlist />} />
+                  <Route path="/address" element={<Address />} />
 
-        <Footer />
-      </OrderProvider>
-      </AddressProvider>
-      </WishlistProvider>
-      </CartProvider>
+                  {/* CATCH-ALL REDIRECT */}
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+
+                <Footer />
+              </OrderProvider>
+            </AddressProvider>
+          </WishlistProvider>
+        </CartProvider>
       </ProductProvider>
-
     </BrowserRouter>
   );
 }

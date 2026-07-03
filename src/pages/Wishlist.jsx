@@ -36,23 +36,24 @@ const wishlistProducts = products.filter(p =>
     //   </div>
 
     // </div>
-<div className="container">
-  <h2 className="text-center">My Wishlist({wishlistProducts.length}) ❤️</h2>
+<div className="container mt-4">
+  <h2 className="text-center mb-4">My Wishlist({wishlistProducts.length}) ❤️</h2>
     <div className="row justify-content-center">
     {wishlistProducts.length === 0 ? (
-      <p className="text-center">No items in wishlist</p>
+      <p className="text-center w-100">No items in wishlist</p>
     ) : (
       wishlistProducts.map(product => (
-        <div
-          className="col-12 col-sm-6 col-lg-4 col-md-4 d-flex justify-content-center mb-4 p-lg-5"
-          key={product._id}
-        >
-          <ProductCard
-            product={product}
-            isWishlistPage={true}
-          />
-        </div>
-      ))
+  <div
+    /* Changed col-md-4 to col-md-3, and col-lg-3 to col-lg-2.4 (or col-xl-2) */
+    className="col-12 col-sm-6 col-md-3 col-lg-2 d-flex justify-content-center mb-4"
+    key={product._id}
+  >
+    <ProductCard
+      product={product}
+      isWishlistPage={true}
+    />
+  </div>
+))
     )}
   </div>
 </div>
