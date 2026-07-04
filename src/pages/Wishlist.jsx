@@ -1,9 +1,9 @@
 import { useWishlist } from "../context/WishlistContext";
 import { useProducts } from "../context/ProductContext";
 import ProductCard from "../components/ProductCard";
-
+import {Navigate, useNavigate} from "react-router-dom";
 function Wishlist() {
-
+  const navigate = useNavigate();
   const { wishlist } = useWishlist();
   const { products } = useProducts();
 
@@ -19,28 +19,32 @@ const wishlistProducts = products.filter(p =>
 //  console.log("result =",wishlistProducts);
 
   return (
-    // <div className="container mt-4">
-
-    //   <h2 className="text-center">My Wishlist ❤️</h2>
-
-    //   <div className="d-flex flex-wrap">
-
-    //     {wishlistProducts.length === 0 ? (
-    //       <p>No items in wishlist</p>
-    //     ) : (
-    //       wishlistProducts.map(product => (
-    //         <ProductCard   key={product._id}   product={product}  isWishlistPage={true}/>
-    //       ))
-    //     )}
-
-    //   </div>
-
-    // </div>
+    
 <div className="container mt-4">
-  <h2 className="text-center mb-4">My Wishlist({wishlistProducts.length}) ❤️</h2>
+  <h2 className="text-center mb-4">My Wishlist({wishlistProducts.length}) 💖</h2>
     <div className="row justify-content-center">
     {wishlistProducts.length === 0 ? (
-      <p className="text-center w-100">No items in wishlist</p>
+      <div className="text-center py-5">
+    <div className="mb-4">
+      {/* A clean Bootstrap shopping bag icon placeholder using pure CSS shapes */}
+      <div 
+        className="mx-auto border border-3 rounded-circle d-flex align-items-center justify-content-center text-muted" 
+        style={{ width: "80px", height: "80px", fontSize: "2rem",backgroundColor:"black" }}
+      >
+        💖
+      </div>
+    </div>
+    <h3 className="fw-bold">Your Wishlist is Empty</h3>
+    <p className="text-muted mb-4">
+      Looks like you haven't added anything to your wishlist yet.
+    </p>
+    <button 
+      className="btn btn-primary px-4 py-2 fw-semibold shadow-sm"
+      onClick={() => navigate("/")} // Change "/" to your actual shop route if it's different
+    >
+      Continue Shopping
+    </button>
+  </div>
     ) : (
       wishlistProducts.map(product => (
   <div

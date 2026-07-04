@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { fetchProducts, useProducts } from "../context/ProductContext";
 import Explore from "../components/Explore";
+import BestSellers from "../components/BestSellers";
 
 function Home(){
 
@@ -28,9 +29,14 @@ setProducts(allProducts);
 
 <Explore product={products} />
 
-      <Link className="btn my-btn mt-3" to="/products">
+
+<Link className="btn my-btn mt-3 bgColor" to="/products">
         Explore Books
       </Link>
+<br />
+<BestSellers />
+
+      
 
     </div>
     </div>

@@ -5,95 +5,6 @@ import { useProducts } from "../context/ProductContext";
 function Filters({ filters, setFilters }) {
   const { allProducts,products, setProducts } = useProducts();
 
-  // const [selectedCategories, setSelectedCategories] = useState([]);
-  // const [sortOrder, setSortOrder] = useState("");
-  // const [rating, setRating] = useState(0);
-
-  // Handle category change
-  // const handleCategoryChange = (e) => {
-  //   const value = e.target.value;
-
-  //   if (selectedCategories.includes(value)) {
-  //     setSelectedCategories(selectedCategories.filter((c) => c !== value));
-  //   } else {
-  //     setSelectedCategories([...selectedCategories, value]);
-  //   }
-  // };
-
-//   const handleCategoryChange = (e) => {
-//   const value = e.target.value;
-
-//   if (value === "All") {
-
-//     setSelectedCategories(["All"]);
-//   } else {
-//     let updatedCategories;
-
-//     if (selectedCategories.includes(value)) {
-//       updatedCategories = selectedCategories.filter((c) => c !== value);
-//     } else {
-//       updatedCategories = [...selectedCategories.filter(c => c !== "All"), value];
-//     }
-
-//     setSelectedCategories(updatedCategories);
-//   }
-// };
-
-  // Apply Filters + Sorting together
-  // const applyFilters = () => {
-  //   let filtered = [...allProducts];
-
-  //   // Category filter
-  //   if (selectedCategories.length > 0) {
-  //     filtered = filtered.filter((p) =>
-  //       selectedCategories.includes(p.category)
-  //     );
-  //   }
-
-  //   // Rating filter
-  //   if (rating > 0) {
-  //     filtered = filtered.filter((p) => p.rating >= rating);
-  //   }
-
-  //   // Sorting
-  //   if (sortOrder === "low") {
-  //     filtered.sort((a, b) => a.price - b.price);
-  //   } else if (sortOrder === "high") {
-  //     filtered.sort((a, b) => b.price - a.price);
-  //   }
-
-  //   setProducts(filtered);
-  // };
-
-  // const applyFilters = () => {
-  // let filtered = [...allProducts];
-
-  // Category filter
-  // if (
-  //   selectedCategories.length > 0 &&
-  //   !selectedCategories.includes("All")
-  // ) {
-  //   filtered = filtered.filter((p) =>
-  //     selectedCategories.includes(p.category)
-  //   );
-  // }
-
-  // Rating filter
-  // if (rating > 0) {
-  //   filtered = filtered.filter((p) => p.rating >= rating);
-  // }
-
-  // Sorting
-//   if (sortOrder === "low") {
-//     filtered.sort((a, b) => a.price - b.price);
-//   } else if (sortOrder === "high") {
-//     filtered.sort((a, b) => b.price - a.price);
-//   }
-
-//   setProducts(filtered);
-// };
-
-  // Clear everything
   const clearAll = () => {
   setFilters({
     category: [],
@@ -120,7 +31,7 @@ function Filters({ filters, setFilters }) {
   });
 
   return (
-    <div>
+    <div className="bgColor p-3">
       <h5>Filters</h5>
 
       {/* CATEGORY */}

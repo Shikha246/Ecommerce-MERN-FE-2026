@@ -23,9 +23,9 @@ function ProductCard({ product, isWishlistPage }) {
 
   return (
     // Added a maxWidth safety cap so cards never balloon outwards on large rows
-    <div className="card w-100 h-100 d-flex flex-column shadow-sm" style={{ maxWidth: "300px", margin: "0 auto" }}>
+    <div className="card bgColor w-100 h-100 d-flex flex-column shadow-sm" style={{ maxWidth: "300px", margin: "0 auto" }}>
       
-      <Link to={`/product/${product._id}`} className="text-decoration-none">
+      <Link to={`/product/${product._id}`}  className="text-decoration-none ">
   {/* The wrapper guarantees a perfectly uniform box for every card */}
   <div 
     className="d-flex align-items-center justify-content-center" 
@@ -33,7 +33,7 @@ function ProductCard({ product, isWishlistPage }) {
       height: "200px",       // Forces every image container to be exactly 200px tall
       width: "100%",         // Matches the card width
       overflow: "hidden", 
-      backgroundColor: "#f8f9fa", // Soft background to fill empty spaces nicely
+      backgroundColor: "rgba(208, 176, 128, 0.852)", // Soft background to fill empty spaces nicely
       padding: "12px"        // Gives the book covers a neat breathing room
     }}
   >
