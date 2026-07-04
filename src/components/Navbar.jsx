@@ -10,6 +10,11 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
+const handleLogout = () =>{
+  localStorage.removeItem("token");
+  navigate("/login");
+}
+
   // Sync search input with URL query parameters
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("search") || "";
@@ -120,6 +125,14 @@ function Navbar() {
               <Link className="nav-link w-100 text-start me-2" to="/profile">
                 Profile
               </Link>
+            </li>
+
+            <li className="nav-item w-100 text-start">
+             <button className="btn btn-outline-danger btn-sm ms-lg-2 mt-1 mt-lg-0"
+             onClick={handleLogout}
+             >
+              Sign Out
+             </button>
             </li>
           </ul>
         </div>

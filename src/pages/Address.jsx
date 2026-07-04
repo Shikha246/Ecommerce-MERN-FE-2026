@@ -26,12 +26,14 @@ function Address() {
     formData.street.trim() &&
     formData.city.trim() &&
     formData.state.trim() &&
-    formData.pincode.trim();
+    formData.pincode.trim().length === 6;
 
   const handleChange = (field, value) => {
+    const finalValue =
+    field === "pincode" ? value.replace(/\D/g, "").slice(0, 6) : value;
     setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: finalValue
     }));
   };
 

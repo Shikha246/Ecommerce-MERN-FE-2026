@@ -80,15 +80,20 @@ useEffect(() => {
     newAddress.street.trim() &&
     newAddress.city.trim() &&
     newAddress.state.trim() &&
-    newAddress.pincode.trim();
+    newAddress.pincode.trim().length === 6;
 
   // ✅ Fixed handleChange
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+     // pincode must be digits only, max 6 characters
+    //  \D means "not a digit"
+  const finalValue =
+    name === "pincode" ? value.replace(/\D/g, "").slice(0, 6) : value;
+
     setNewAddress((prev) => ({
       ...prev,
-      [name]: value
+      [name]: finalValue
     }));
   };
 
