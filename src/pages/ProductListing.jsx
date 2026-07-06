@@ -15,7 +15,7 @@ function ProductListing(){
     sort: "",
     ratingRange: 0
   });
- 
+ const [showFilters, setShowFilters] = useState(false);
   const queryParams = new URLSearchParams(location.search);
 // const category = queryParams.get("category");
 const categoryFromURL = queryParams.get("category");
@@ -73,13 +73,22 @@ const filteredProducts = products
 
     <div className="container mt-4">
 
+{/* Mobile-only filter toggle button */}
+    <button
+      className="btn btn-outline-secondary d-md-none mb-3"
+      onClick={() => setShowFilters(prev => !prev)}
+    >
+      <i className="bi bi-sliders me-2"></i>
+      {showFilters ? "Hide Filters" : "Show Filters"}
+    </button>
+
       <div className="row">
 {/* FILTER SIDEBAR */}
-        <div className="col-md-3">
-          <div className="sticky-filter mb-2">
-          <Filters filters={filters} setFilters={setFilters} />
-          </div>
+        <div className={`col-md-3 ${showFilters ? "d-block" : "d-none"} d-md-block`}>
+        <div className="sticky-filter mb-2">
+        <Filters filters={filters} setFilters={setFilters} />
         </div>
+      </div>
 {/* PRODUCTS */}
         <div className="col-md-9">
       <div className="row">
