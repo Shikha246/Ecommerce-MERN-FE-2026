@@ -13,7 +13,7 @@ function ProductListing(){
   const [filters, setFilters] = useState({
     category: [],
     sort: "",
-    ratingRange: 0
+    rating: 0
   });
  const [showFilters, setShowFilters] = useState(false);
   const queryParams = new URLSearchParams(location.search);
@@ -45,13 +45,10 @@ const filteredProducts = products
       filters.category.length === 0 ||
       filters.category.includes(product.category.toLowerCase());
 
-    // Rating filter
-    const matchesRating =
-  filters.ratingRange === "1-3"
-    ? product.rating >= 1 && product.rating <= 3
-    : filters.ratingRange === "4-5"
-    ? product.rating >= 4 && product.rating <= 5
-    : true;
+    
+   // Rating filter
+const matchesRating =
+  product.rating >= filters.rating;
     return (
       // matchesURLCategory &&
       matchesSearch &&
