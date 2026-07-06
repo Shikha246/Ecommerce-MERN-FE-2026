@@ -13,7 +13,7 @@ function ProductListing(){
   const [filters, setFilters] = useState({
     category: [],
     sort: "",
-    rating: 0
+    ratingRange: 0
   });
  
   const queryParams = new URLSearchParams(location.search);
@@ -47,8 +47,11 @@ const filteredProducts = products
 
     // Rating filter
     const matchesRating =
-      product.rating >= filters.rating;
-
+  filters.ratingRange === "1-3"
+    ? product.rating >= 1 && product.rating <= 3
+    : filters.ratingRange === "4-5"
+    ? product.rating >= 4 && product.rating <= 5
+    : true;
     return (
       // matchesURLCategory &&
       matchesSearch &&

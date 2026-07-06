@@ -66,7 +66,9 @@ function Cart() {
         <div className="col-12 col-md-8">
           <h5 className="mb-1 text-center text-md-start">{item.name}</h5>
           <p className="text-muted mb-2 text-center text-md-start">Price: ₹{item.price}</p>
-          
+          {item.author && (
+  <p className="text-muted small mb-1 text-center text-md-start">by {item.author}</p>
+)}
           {/* Quantity Controls */}
           <div className="d-flex justify-content-center justify-content-md-start align-items-center mb-3">
             <button className="btn btn-sm btn-outline-secondary" onClick={() => updateQty(item.productId, "dec")}>-</button>

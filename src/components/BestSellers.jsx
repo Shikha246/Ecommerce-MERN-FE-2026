@@ -36,7 +36,7 @@ function BestSellers() {
           <Link key={book._id} className="book-card bgColor" to={`/product/${book._id}`}>
             <img src={book.image} alt={book.name} className="book-cover" />
             <h3>{book.name}</h3>
-            {/* <p className="author">By {book.publisher}</p> */}
+            <p className="author">By {book.author}</p>
             <p className="price">₹{book.price}</p>
             {/* Optional: You can display the sales count badge to show off its popularity */}
             <span className="sales-badge">Top Seller</span>

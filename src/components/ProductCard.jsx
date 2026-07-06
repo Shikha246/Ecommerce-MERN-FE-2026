@@ -19,7 +19,7 @@ function ProductCard({ product, isWishlistPage }) {
   );
 
   const quantityInCart = cartItem ? cartItem.qty : 0;
-  const availableStock = product.stock - quantityInCart;
+  const availableStock = product.stock;
 
   return (
     // Added a maxWidth safety cap so cards never balloon outwards on large rows

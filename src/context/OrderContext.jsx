@@ -1,5 +1,9 @@
 import { createContext, useContext, useState,useEffect } from "react";
 import axios from "axios";
+import { getUserIdFromToken } from "../utils/auth";
+
+
+
 const OrderContext = createContext();
 
 export const useOrder = () => useContext(OrderContext);
@@ -7,7 +11,7 @@ export const useOrder = () => useContext(OrderContext);
 export const OrderProvider = ({ children }) => {
 
   const [orders, setOrders] = useState([]);
-const userId = "65f1a2b3c4d5e6f7890abcd1";
+const userId = getUserIdFromToken();
  
 
 

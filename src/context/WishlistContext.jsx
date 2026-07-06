@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-
+import { getUserIdFromToken } from "../utils/auth";
 const WishlistContext = createContext();
 
 export const useWishlist = () => useContext(WishlistContext);
@@ -10,13 +10,14 @@ export const useWishlist = () => useContext(WishlistContext);
 export const WishlistProvider = ({ children }) => {
 
   const [wishlist, setWishlist] = useState([]);
-  // console.log("This is wishlist STATE variable:",wishlist);
-  const userId = "65f1a2b3c4d5e6f7890abcd1"; // static user
+ 
 
   // ✅ GET wishlist from backend (Axios)
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
+        const userId = getUserIdFromToken();
+    if (!userId) return;
         const res = await axios.get(
           `https://ecommerce-mern-be-2026.vercel.app/api/wishlist/${userId}`
         );
@@ -38,7 +39,7 @@ export const WishlistProvider = ({ children }) => {
     const res = await axios.post(
       "https://ecommerce-mern-be-2026.vercel.app/api/wishlist/add",
       {
-        userId,
+        userId:getUserIdFromToken(),
         productId: product._id
       }
     );
@@ -55,6 +56,8 @@ export const WishlistProvider = ({ children }) => {
   // ✅ REMOVE from wishlist (Axios)
   const removeFromWishlist = async (productId) => {
     try {
+      const userId = getUserIdFromToken();
+    
       const res = await axios.delete(
         `https://ecommerce-mern-be-2026.vercel.app/api/wishlist/remove/${userId}/${productId}`
       );
@@ -62,7 +65,7 @@ export const WishlistProvider = ({ children }) => {
       const data = res.data;
 
       setWishlist(data.products || data); // depends on your backend response
-      toast.info("Removed from the wishlist");
+      // toast.info("Added to the Cart");
 
     } catch (err) {
       console.log(err);

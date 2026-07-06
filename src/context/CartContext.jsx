@@ -1,6 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import {useProducts} from "./ProductContext";
+import { getUserIdFromToken } from "../utils/auth";
+
+
 const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
@@ -8,7 +12,7 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
 
   const [cart, setCart] = useState([]);
-
+const {setProducts} = useProducts();
   // 🔹 Load cart from localStorage on first render
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -21,7 +25,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       const res = await axios.get(
-        "https://ecommerce-mern-be-2026.vercel.app/api/cart/65f1a2b3c4d5e6f7890abcd1"
+        `https://ecommerce-mern-be-2026.vercel.app/api/cart/${userId}`
       );
 
       setCart(res.data.items || []);
@@ -39,7 +43,7 @@ export const CartProvider = ({ children }) => {
     const res = await axios.post(
       "https://ecommerce-mern-be-2026.vercel.app/api/cart/add",
       {
-        userId: "65f1a2b3c4d5e6f7890abcd1",
+        userId: getUserIdFromToken(),
         product
       }
     );
@@ -61,7 +65,7 @@ const removeFromCart = async (productId) => {
       "https://ecommerce-mern-be-2026.vercel.app/api/cart/remove",
       {
         data: {
-          userId: "65f1a2b3c4d5e6f7890abcd1",
+          userId: getUserIdFromToken(),
           productId
         }
       }
@@ -80,7 +84,7 @@ const removeFromCart = async (productId) => {
     const res = await axios.put(
       "https://ecommerce-mern-be-2026.vercel.app/api/cart/update",
       {
-        userId: "65f1a2b3c4d5e6f7890abcd1",
+        userId: getUserIdFromToken(),
         productId,
         action
       }
@@ -93,8 +97,23 @@ const removeFromCart = async (productId) => {
     console.error(err);
   }
 };
-  // 🔹 Clear entire cart
-  const clearCart = () => setCart([]);
+  // 🔹 Clear entire cart (locally + on the backend)
+const clearCart = async () => {
+  const userId = getUserIdFromToken();
+  if (!userId) {
+    setCart([]);
+    return;
+  }
+
+  try {
+    await axios.delete(
+      `https://ecommerce-mern-be-2026.vercel.app/api/clear/${userId}`
+    );
+    setCart([]);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   // 🔹 Total price (optimized)
   const totalPrice = useMemo(() => {

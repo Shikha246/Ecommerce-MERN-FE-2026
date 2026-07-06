@@ -5,12 +5,7 @@ import { useOrder } from "../context/OrderContext";
 import { useAddress } from "../context/AddressContext";
 import { toast } from "react-toastify";
 import axios from "axios";
-// const user = {
-//   _id: "65f1a2b3c4d5e6f7890abcd1",
-//   name: "Shikha Ramrakhyani",
-//   email: "shikha@email.com",
-//   phone: "9876543210"
-// };
+
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -18,6 +13,8 @@ const [loading, setLoading] = useState(true);
   const { cart, clearCart } = useCart();
   const { orders, placeOrder } = useOrder();
   const [showModal, setShowModal] = useState(false);
+  const [showOrderModal, setShowOrderModal] = useState(false);
+
   const {
     addresses,
     addAddress,
@@ -184,10 +181,10 @@ const handlePlaceOrder = async () => {
     // ✅ update UI
     placeOrder(res.data);
 
-    clearCart();
+    await clearCart();
     setSelectedAddress(null);
 
-    toast.success("Order Placed Successfully!");
+    setShowOrderModal(true);
   } catch (error) {
     console.error(error);
     toast.error("Failed to place order");
@@ -454,6 +451,29 @@ if (!user) {
         </>
       )}
 
+      
+      {/* MODAL : order Placed */}
+      {showOrderModal && (
+  <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(15, 23, 42, 0.4)", backdropFilter: "blur(4px)" }}>
+    <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-content">
+        <div className="modal-body text-center py-5">
+          <div className="mb-3" style={{ fontSize: "3rem" }}>✅</div>
+          <h4 className="fw-bold mb-2">Order Placed Successfully!</h4>
+          <p className="text-muted mb-4">
+            Thank you for your order. You can track it in your order history below.
+          </p>
+          <button
+            className="btn btn-success px-4"
+            onClick={() => setShowOrderModal(false)}
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }

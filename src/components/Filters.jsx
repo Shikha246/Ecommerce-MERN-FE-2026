@@ -9,7 +9,7 @@ function Filters({ filters, setFilters }) {
   setFilters({
     category: [],
     sort: "",
-    rating: 0
+    ratingRange: 0
   });
 };
 
@@ -20,7 +20,11 @@ function Filters({ filters, setFilters }) {
       filters.category.includes(product.category);
 
     const matchRating =
-      product.rating >= filters.rating;
+  filters.ratingRange === "1-3"
+    ? product.rating >= 1 && product.rating <= 3
+    : filters.ratingRange === "4-5"
+    ? product.rating >= 4 && product.rating <= 5
+    : true;
 
     return matchCategory && matchRating;
   })
@@ -169,22 +173,49 @@ All
       <hr />
 
       {/* RATING */}
-      <p>Rating: {filters.rating} & above</p>
+{/* RATING */}
+<p>Rating</p>
 
-<input
-  type="range"
-  className="w-100"
-  min="0"
-  max="5"
-  step="0.1"
-  value={filters.rating}
-  onChange={(e) =>
-    setFilters(prev => ({
-      ...prev,
-      rating: Number(e.target.value)
-    }))
-  }
-/>
+<label>
+  <input
+    className="me-2"
+    type="radio"
+    name="ratingRange"
+    checked={filters.ratingRange === "1-3"}
+    onChange={() =>
+      setFilters(prev => ({ ...prev, ratingRange: "1-3" }))
+    }
+  />
+  1 – 3 ⭐
+</label>
+<br />
+
+<label>
+  <input
+    className="me-2"
+    type="radio"
+    name="ratingRange"
+    checked={filters.ratingRange === "4-5"}
+    onChange={() =>
+      setFilters(prev => ({ ...prev, ratingRange: "4-5" }))
+    }
+  />
+  4 – 5 ⭐
+</label>
+<br />
+
+<label>
+  <input
+    className="me-2"
+    type="radio"
+    name="ratingRange"
+    checked={filters.ratingRange === ""}
+    onChange={() =>
+      setFilters(prev => ({ ...prev, ratingRange: "" }))
+    }
+  />
+  All ratings
+</label>
 
       <hr />
 
