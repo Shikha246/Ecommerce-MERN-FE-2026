@@ -2,16 +2,24 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
+import { useOrder } from "../context/OrderContext";
+import { useAddress } from "../context/AddressContext";
 
 function Navbar() {
   const [searchValue, setSearchValue] = useState("");
-  const { wishlist } = useWishlist();
-  const { cart } = useCart();
+  const { wishlist, clearWishlist } = useWishlist();
+  const { cart, clearCartState } = useCart();
+  const { clearOrders } = useOrder();
+  const { clearAddresses } = useAddress();
   const navigate = useNavigate();
   const location = useLocation();
 
 const handleLogout = () =>{
   localStorage.removeItem("token");
+  clearOrders();
+  clearCartState();
+  clearWishlist();
+  clearAddresses();
   navigate("/login");
 }
 

@@ -1,5 +1,7 @@
 
 import { Link } from "react-router-dom";
+
+
 function Explore({product}){
     const categories = [...new Set(product.map(p => p.category))];
 return(

@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
+import { useOrder } from "../context/OrderContext";
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
+import { useAddress } from "../context/AddressContext";
+
 
 const Login = () => {
   const navigate = useNavigate();
+  const { fetchOrders } = useOrder();
+  const { fetchCart } = useCart();
+const { fetchWishlist } = useWishlist();
+const { fetchAddresses } = useAddress();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,10 +28,8 @@ const Login = () => {
         "https://ecommerce-mern-be-2026.vercel.app/api/auth/login",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }), // Removed phone payload
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
         }
       );
 
@@ -30,6 +37,7 @@ const Login = () => {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
+        await Promise.all([fetchOrders(), fetchCart(), fetchWishlist(), fetchAddresses()]);
         navigate("/");
       } else {
         alert(data.message || "Invalid credentials");

@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useOrder } from "../context/OrderContext";
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
+import { useAddress } from "../context/AddressContext";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -7,6 +11,10 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState(""); // Set initial value to an empty string
   const navigate = useNavigate();
+  const { fetchOrders } = useOrder();
+  const { fetchCart } = useCart();
+const { fetchWishlist } = useWishlist();
+const { fetchAddresses } = useAddress();
 
   const handleSignup = async () => {
     try {
@@ -30,7 +38,8 @@ const Signup = () => {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
-        navigate("/");
+        await Promise.all([fetchOrders(), fetchCart(), fetchWishlist(), fetchAddresses()]);
+  navigate("/");
       } else {
         alert(data.message || "Signup failed");
       }
