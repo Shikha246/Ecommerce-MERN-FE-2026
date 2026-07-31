@@ -20,6 +20,8 @@ import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import { AddressProvider } from "./context/AddressContext";
 import { OrderProvider } from "./context/OrderContext";
+import { ChatProvider } from "./context/ChatContext";
+import ChatWidget from "./components/ChatWidget";
 import Footer from "./components/Footer";
 
 // Wrapper for Routes that REQUIRE a user to be logged in
@@ -42,52 +44,55 @@ function App() {
           <WishlistProvider>
             <AddressProvider>
               <OrderProvider>
-                <Navbar />
-                <ToastContainer />
-                
-                <Routes>
-                  {/* ==============================================
-                      PROTECTED ROUTES (Must log in to see)
-                     ============================================== */}
-                  <Route 
-                    path="/" 
-                    element={<ProtectedRoute><Home /></ProtectedRoute>} 
-                  />
-                  <Route 
-                    path="/profile" 
-                    element={<ProtectedRoute><Profile /></ProtectedRoute>} 
-                  />
-                  <Route 
-                    path="/checkout" 
-                    element={<ProtectedRoute><Checkout /></ProtectedRoute>} 
-                  />
+                <ChatProvider>
+                  <Navbar />
+                  <ToastContainer />
 
-                  {/* ==============================================
-                      PUBLIC-ONLY ROUTES (Hidden if logged in)
-                     ============================================== */}
-                  <Route 
-                    path="/login" 
-                    element={<PublicRoute><Login /></PublicRoute>} 
-                  />
-                  <Route 
-                    path="/signup" 
-                    element={<PublicRoute><Signup /></PublicRoute>} 
-                  />
+                  <Routes>
+                    {/* ==============================================
+                        PROTECTED ROUTES (Must log in to see)
+                       ============================================== */}
+                    <Route
+                      path="/"
+                      element={<ProtectedRoute><Home /></ProtectedRoute>}
+                    />
+                    <Route
+                      path="/profile"
+                      element={<ProtectedRoute><Profile /></ProtectedRoute>}
+                    />
+                    <Route
+                      path="/checkout"
+                      element={<ProtectedRoute><Checkout /></ProtectedRoute>}
+                    />
 
-                  {/* ==============================================
-                      OPEN ROUTES (Anyone can view anytime)
-                     ============================================== */}
-                  <Route path="/products" element={<ProductListing />} />
-                  <Route path="/product/:id" element={<ProductDetails />} />
-                  <Route path="/cart" element={<Cart />} />
-                  <Route path="/wishlist" element={<Wishlist />} />
-                  <Route path="/address" element={<Address />} />
+                    {/* ==============================================
+                        PUBLIC-ONLY ROUTES (Hidden if logged in)
+                       ============================================== */}
+                    <Route
+                      path="/login"
+                      element={<PublicRoute><Login /></PublicRoute>}
+                    />
+                    <Route
+                      path="/signup"
+                      element={<PublicRoute><Signup /></PublicRoute>}
+                    />
 
-                  {/* CATCH-ALL REDIRECT */}
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
+                    {/* ==============================================
+                        OPEN ROUTES (Anyone can view anytime)
+                       ============================================== */}
+                    <Route path="/products" element={<ProductListing />} />
+                    <Route path="/product/:id" element={<ProductDetails />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/wishlist" element={<Wishlist />} />
+                    <Route path="/address" element={<Address />} />
 
-                <Footer />
+                    {/* CATCH-ALL REDIRECT */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+
+                  <Footer />
+                  <ChatWidget />
+                </ChatProvider>
               </OrderProvider>
             </AddressProvider>
           </WishlistProvider>

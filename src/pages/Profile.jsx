@@ -215,7 +215,7 @@ if (!user) {
                 width: "75px",
                 height: "75px",
                 borderRadius: "50%",
-                background: "linear-gradient(135deg, #4f46e5, #06b6d4)",
+                background: "linear-gradient(135deg, #a87d2e, #e6f0f1)",
                 fontSize: "1.6rem",
                 boxShadow: "0 4px 12px rgba(79, 70, 229, 0.2)"
               }}
@@ -245,7 +245,7 @@ if (!user) {
             <h4 className="fw-bold m-0 text-dark">Select Shipping Address</h4>
             <button
               className="btn btn-sm px-3 py-2 rounded-3 fw-medium text-white d-flex align-items-center gap-1 shadow-sm"
-              style={{ backgroundColor: "#4f46e5", border: "none" }}
+              style={{ backgroundColor: "#a87d2e", border: "none" }}
               onClick={() => {
                 setShowModal(true);
                 setEditId(null);
@@ -272,7 +272,7 @@ if (!user) {
                       className="card h-100 p-3 rounded-4 transition-all"
                       style={{
                         cursor: "pointer",
-                        border: isSelected ? "2px solid #4f46e5" : "1px solid #e5e7eb",
+                        border: isSelected ? "2px solid #a87d2e" : "1px solid #e5e7eb",
                         backgroundColor: isSelected ? "#f8fafc" : "#ffffff",
                         boxShadow: isSelected ? "0 4px 12px rgba(79, 70, 229, 0.08)" : "0 2px 4px rgba(0,0,0,0.02)"
                       }}
@@ -284,7 +284,7 @@ if (!user) {
                             type="radio"
                             name="selectedAddress"
                             className="form-check-input m-0"
-                            style={{ cursor: "pointer", accentColor: "#4f46e5" }}
+                            style={{ cursor: "pointer", accentColor: "#a87d2e" }}
                             checked={isSelected}
                             onChange={() => setSelectedAddress(addr)}
                           />
@@ -323,14 +323,14 @@ if (!user) {
 
           {/* Place Order CTA Banner */}
           <div className="card border-0 p-3 rounded-4 shadow-sm mb-5 text-white d-flex flex-sm-row justify-content-between align-items-center gap-3"
-               style={{ background: "linear-gradient(135deg, #1e1b4b, #312e81)" }}>
+               style={{ background: "linear-gradient(135deg, #a87d2e, #71592c)" }}>
             <div>
               <h6 className="fw-bold m-0">Ready to finalize?</h6>
               <small className="text-white-50">Please ensure your destination address is explicitly checked above.</small>
             </div>
             <button
               className="btn btn-light px-4 py-2 rounded-3 fw-bold text-indigo shadow-sm"
-              style={{ color: "#4f46e5", border: "none" }}
+              style={{ color: "#a87d2e", border: "none" }}
               onClick={handlePlaceOrder}
             >
               Place Order Now
@@ -454,7 +454,7 @@ if (!user) {
       
       {/* MODAL : order Placed */}
       {showOrderModal && (
-  <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(15, 23, 42, 0.4)", backdropFilter: "blur(4px)" }}>
+  <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(208, 176, 128, 0.852)", backdropFilter: "blur(4px)" }}>
     <div className="modal-dialog modal-dialog-centered">
       <div className="modal-content">
         <div className="modal-body text-center py-5">
