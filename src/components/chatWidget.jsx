@@ -36,8 +36,33 @@ function ChatWidget() {
             overflow: "hidden",
           }}
         >
-          <div style={{ background: "#a87d2e", color: "#fff", padding: "12px", fontWeight: "bold" }}>
-            BookStore Assistant
+          <div
+            style={{
+              background: "#a87d2e",
+              color: "#fff",
+              padding: "12px",
+              fontWeight: "bold",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span>BookStore Assistant</span>
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label="Close chat"
+              style={{
+                background: "none",
+                border: "none",
+                color: "#fff",
+                fontSize: "20px",
+                lineHeight: "1",
+                cursor: "pointer",
+                padding: "0 4px",
+              }}
+            >
+              ×
+            </button>
           </div>
 
           <div style={{ flex: 1, overflowY: "auto", padding: "10px" }}>

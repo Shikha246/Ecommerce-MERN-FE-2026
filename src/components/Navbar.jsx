@@ -135,12 +135,14 @@ const handleLogout = () =>{
               </Link>
             </li>
 
-            <li className="nav-item w-100 text-start">
-             <button className="btn btn-outline-danger btn-sm ms-lg-2 mt-1 mt-lg-0"
-             onClick={handleLogout}
-             >
-              Sign Out
-             </button>
+             <li className="nav-item w-100 text-start">
+              <button
+                className="btn btn-outline-danger btn-sm ms-lg-2 mt-1 mt-lg-0 d-flex align-items-center gap-2 text-nowrap"
+                onClick={handleLogout}
+              >
+                <i className="bi bi-box-arrow-right"></i>
+                Sign Out
+              </button>
             </li>
           </ul>
         </div>
