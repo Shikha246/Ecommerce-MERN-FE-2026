@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useChat } from "../context/ChatContext";
+import { useChat } from "../context/chatContext";
 import ReactMarkdown from "react-markdown";
 function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);

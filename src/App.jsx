@@ -20,8 +20,8 @@ import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import { AddressProvider } from "./context/AddressContext";
 import { OrderProvider } from "./context/OrderContext";
-import { ChatProvider } from "./context/ChatContext";
-import ChatWidget from "./components/ChatWidget";
+import { ChatProvider } from "./context/chatContext";
+import ChatWidget from "./components/chatWidget";
 import Footer from "./components/Footer";
 
 // Wrapper for Routes that REQUIRE a user to be logged in
