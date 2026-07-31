@@ -24,8 +24,8 @@ export const ChatProvider = ({ children }) => {
         "https://ecommerce-mern-be-2026.vercel.app/api/chat/message",
         {
           message: text,
-          // send prior turns (excluding the greeting) so the bot has context
-          history: messages.slice(1).map((m) => ({ role: m.role, text: m.text })),
+          // This keeps only the last 10 messages (5 exchanges) instead of the whole conversation — plenty for context, without unbounded growth.
+          history: messages.slice(1).slice(-10).map((m) => ({ role: m.role, text: m.text })),
         },
         token ? { headers: { Authorization: `Bearer ${token}` } } : {}
       );
