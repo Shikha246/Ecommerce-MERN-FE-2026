@@ -1,8 +1,8 @@
-# 🛍️ Ecommerce MERN Application
+# 🛍️ BookStore — Ecommerce MERN Application
 
-A full-stack Ecommerce application built using the MERN stack.
+A full-stack ecommerce application built using the MERN stack, for browsing and purchasing books.
 
-This platform enables users to browse products, manage wishlists, place orders, and enjoy a seamless online shopping experience through a responsive and user-friendly interface.
+Users can browse the catalog, manage a cart and wishlist, save shipping addresses, place orders, and get help from an AI shopping assistant — all through a responsive, authenticated interface.
 
 ---
 
@@ -18,8 +18,6 @@ Watch a walkthrough of all major features of the application:
 
 [Watch Demo Video](https://drive.google.com/file/d/1gXVZZtDEOhSnuppUasKE7D40FErspyMY/view?usp=sharing)
 
-
-
 ---
 
 ## ⚡ Quick Start
@@ -28,11 +26,8 @@ Clone the repository and run the project locally.
 
 ```bash
 git clone https://github.com/Shikha246/Ecommerce-MERN-FE-2026.git
-
 cd Ecommerce-MERN-FE-2026
-
 npm install
-
 npm run dev
 ```
 
@@ -41,7 +36,6 @@ npm run dev
 ## 🛠️ Tech Stack
 
 ### Frontend
-
 * React.js
 * React Router DOM
 * Context API
@@ -50,75 +44,89 @@ npm run dev
 * CSS3
 
 ### Backend
-
 * Node.js
 * Express.js
+* Google Gemini API (AI assistant / function calling)
+
+### Auth
+* JWT (jsonwebtoken)
+* bcryptjs
 
 ### Database
-
 * MongoDB
 * Mongoose
 
 ### Development Tools
-
 * Vite
 * Git & GitHub
 * Postman
 
 ### Additional Libraries Used
 
-| Library          | Purpose                                |
-| ---------------- | -------------------------------------- |
-| Axios            | Handles API communication              |
-| React Router DOM | Client-side routing                    |
-| React Toastify   | User notifications                     |
-| Express          | Backend server framework               |
-| Mongoose         | MongoDB ODM                            |
-| dotenv           | Environment variable management        |
-| cors             | Cross-origin resource sharing          |
-| nodemon          | Auto server restart during development |
+| Library          | Purpose                                          |
+| ---------------- | ------------------------------------------------- |
+| Axios            | Handles API communication                          |
+| React Router DOM | Client-side routing                                |
+| React Toastify   | User notifications                                 |
+| Express          | Backend server framework                           |
+| Mongoose         | MongoDB ODM                                        |
+| dotenv           | Environment variable management                    |
+| cors             | Cross-origin resource sharing                       |
+| nodemon          | Auto server restart during development             |
+| jsonwebtoken     | Issues and verifies JWTs for authenticated sessions |
+| bcryptjs         | Hashes and verifies user passwords                  |
+| @google/genai    | Gemini API SDK powering the AI assistant            |
 
 ---
 
 ## ✨ Features
 
-### 🛍️ Product Management
+### 🔐 Authentication
+* User signup & login
+* Passwords hashed with bcryptjs
+* JWT-based session handling
+* Protected profile route (`GET /api/auth/profile`)
 
-* View all products
-* View product details
-* Add products to database
-* Browse products by category
+### 🛍️ Product Catalog
+* Browse all products
+* View individual product details
+* Browse by category (programming, fiction, self-help, finance)
+
+### 🛒 Cart Management
+* Add and remove items from cart
+* Increase/decrease item quantity
+* Live stock management — adding to cart reserves stock, removing restores it
+* Clear entire cart
 
 ### ❤️ Wishlist Management
-
-* Add products to wishlist
-* Remove products from wishlist
-* View saved wishlist products
+* Add/remove products from wishlist
 * Prevent duplicate wishlist entries
+* View saved wishlist products
+
+### 📍 Address Management
+* Add, update, and delete saved shipping addresses
+* Select an address at checkout
 
 ### 📦 Order Management
-
-* Place orders
-* Store shipping information
+* Place orders with shipping details
 * View order history
-* Track customer purchases
 
 ### 📂 Category Management
+* Fetch all categories and category details
 
-* Fetch all categories
-* View category details
+### 🤖 AI Shopping Assistant
+* Conversational chatbot on every page via a floating chat widget
+* Answers product questions (availability, price, category, author) by querying the live catalog in real time — never guesses or invents book details
+* Looks up the logged-in customer's own order status and history on request
+* Order lookups are scoped strictly to the authenticated user via JWT — the assistant can never access another customer's data, and guests are prompted to log in rather than shown any order info
+* Built with Google's Gemini API using function/tool calling: the model decides when it needs real data, the backend runs the actual MongoDB query, and the result is fed back to generate a grounded response
 
 ### 📱 Responsive UI
-
-* Mobile-friendly design
-* Tablet responsive
-* Desktop optimized
+* Mobile, tablet, and desktop optimized
 
 ### 🔗 REST API Integration
-
-* Connected frontend and backend
-* Full CRUD operations
-* MongoDB persistence
+* Full CRUD across products, cart, wishlist, addresses, and orders
+* MongoDB persistence throughout
 
 ---
 
@@ -128,270 +136,139 @@ Create a `.env` file in the backend directory:
 
 ```env
 MONGODB=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+GEMINI_API_KEY=your_gemini_api_key
 PORT=5000
 ```
-
-Replace `your_mongodb_connection_string` with your MongoDB Atlas connection string.
 
 ---
 
 # 📡 API Reference
 
----
+## 🔐 Auth APIs
 
-# 🛍️ Product APIs
-
-## Get All Products
-
-### Request
-
-`GET /api/products`
-
-### Response
-
+**Signup**
+`POST /api/auth/signup`
 ```json
-{
-  "data": {
-    "products": [
-      {
-        "_id": "6846e6b9f5c8b71234567890",
-        "title": "Men's Running Shoes",
-        "price": 2499,
-        "category": "Footwear"
-      }
-    ]
-  }
-}
+{ "name": "Jane Doe", "email": "jane@example.com", "password": "yourpassword" }
 ```
+
+**Login**
+`POST /api/auth/login`
+```json
+{ "email": "jane@example.com", "password": "yourpassword" }
+```
+Response includes a JWT `token`.
+
+**Get Profile** (protected)
+`GET /api/auth/profile`
+Header: `Authorization: Bearer <token>`
 
 ---
 
-## Get Product By ID
+## 🤖 AI Assistant API
 
-### Request
-
-`GET /api/products/:productId`
-
-### Response
-
+**Send Chat Message**
+`POST /api/chat/message`
 ```json
-{
-  "data": {
-    "product": {
-      "_id": "6846e6b9f5c8b71234567890",
-      "title": "Men's Running Shoes",
-      "price": 2499,
-      "description": "Comfortable running shoes"
-    }
-  }
-}
+{ "message": "Do you have any finance books under 500?", "history": [] }
 ```
+Include `Authorization: Bearer <token>` to let the assistant answer order-related questions for the logged-in user. Without a token, it can still answer product questions but will ask guests to log in for order lookups.
 
 ---
 
-## Create Product
+## 🛍️ Product APIs
 
-### Request
-
-`POST /api/products`
-
+**Get All Products** — `GET /api/products`
 ```json
 {
-  "title": "Wireless Headphones",
-  "price": 3999,
-  "category": "Electronics",
-  "description": "Noise cancelling headphones"
+  "name": "Atomic Habits",
+  "author": "James Clear",
+  "category": "self-help",
+  "price": 499,
+  "stock": 12,
+  "rating": 4.7
 }
 ```
 
-### Response
-
-```json
-{
-  "message": "Product added successfully",
-  "data": {
-    "product": {
-      "_id": "6846e6b9f5c8b71234567890",
-      "title": "Wireless Headphones",
-      "price": 3999
-    }
-  }
-}
-```
+**Get Product By ID** — `GET /api/products/:id`
 
 ---
 
-# ❤️ Wishlist APIs
+## 🛒 Cart APIs
 
-## Get Wishlist
+**Get Cart** — `GET /api/cart/:userId`
 
-### Request
-
-`GET /wishlist/:userId`
-
-### Response
-
+**Add to Cart** — `POST /api/cart/add`
 ```json
-{
-  "products": [
-    "6846e6b9f5c8b71234567890",
-    "6846e7a2f5c8b71234567891"
-  ]
-}
+{ "userId": "...", "product": { "_id": "...", "name": "Atomic Habits", "price": 499 } }
 ```
+
+**Remove from Cart** — `DELETE /api/cart/remove`
+```json
+{ "userId": "...", "productId": "..." }
+```
+
+**Update Quantity** — `PUT /api/cart/update`
+```json
+{ "userId": "...", "productId": "...", "action": "inc" }
+```
+
+**Clear Cart** — `DELETE /api/clear/:userId`
 
 ---
 
-## Add Product To Wishlist
+## ❤️ Wishlist APIs
 
-### Request
+**Get Wishlist** — `GET /api/wishlist/:userId`
 
-`POST /wishlist/add`
-
+**Add to Wishlist** — `POST /api/wishlist/add`
 ```json
-{
-  "userId": "12345",
-  "productId": "6846e6b9f5c8b71234567890"
-}
+{ "userId": "...", "productId": "..." }
 ```
 
-### Response
-
-```json
-{
-  "products": [
-    "6846e6b9f5c8b71234567890"
-  ]
-}
-```
+**Remove from Wishlist** — `DELETE /api/wishlist/remove/:userId/:productId`
 
 ---
 
-## Remove Product From Wishlist
+## 📍 Address APIs
 
-### Request
+**Add Address** — `POST /api/address`
 
-`DELETE /wishlist/remove/:userId/:productId`
+**Get Addresses** — `GET /api/address/:userId`
 
-### Response
+**Update Address** — `PUT /api/address/update/:id`
 
-```json
-{
-  "products": []
-}
-```
+**Delete Address** — `DELETE /api/address/delete/:id`
 
 ---
 
-# 📦 Order APIs
+## 📦 Order APIs
 
-## Place Order
-
-### Request
-
-`POST /orders/place`
-
+**Place Order** — `POST /api/orders/place`
 ```json
 {
-  "userId": "12345",
-  "items": [
-    {
-      "productId": "6846e6b9f5c8b71234567890",
-      "quantity": 2
-    }
-  ],
-  "address": "Pune, Maharashtra",
-  "total": 4998
+  "userId": "...",
+  "items": [{ "productId": "...", "name": "Atomic Habits", "price": 499, "qty": 1 }],
+  "address": { "name": "...", "street": "...", "city": "...", "state": "...", "pincode": "..." },
+  "total": 499
 }
 ```
 
-### Response
-
-```json
-{
-  "_id": "6852e6b9f5c8b71234999999",
-  "userId": "12345",
-  "total": 4998,
-  "address": "Pune, Maharashtra",
-  "createdAt": "2026-06-01T10:30:15.123Z"
-}
-```
+**Get User Orders** — `GET /api/orders/:userId`
 
 ---
 
-## Get User Orders
+## 📂 Category APIs
 
-### Request
+**Get All Categories** — `GET /api/categories`
 
-`GET /orders/:userId`
-
-### Response
-
-```json
-[
-  {
-    "_id": "6852e6b9f5c8b71234999999",
-    "total": 4998,
-    "address": "Pune, Maharashtra",
-    "createdAt": "2026-06-01T10:30:15.123Z"
-  }
-]
-```
+**Get Category By ID** — `GET /api/categories/:id`
 
 ---
-
-# 📂 Category APIs
-
-## Get All Categories
-
-### Request
-
-`GET /api/categories`
-
-### Response
-
-```json
-{
-  "data": {
-    "categories": [
-      {
-        "_id": "123",
-        "categoryName": "Electronics"
-      },
-      {
-        "_id": "124",
-        "categoryName": "Footwear"
-      }
-    ]
-  }
-}
-```
-
----
-
-## Get Category By ID
-
-### Request
-
-`GET /api/categories/:categoryId`
-
-### Response
-
-```json
-{
-  "data": {
-    "category": {
-      "_id": "123",
-      "categoryName": "Electronics"
-    }
-  }
-}
-```
-
 
 ## 🚀 Future Enhancements
 
-* User Authentication
 * Payment Gateway Integration
 * Product Reviews & Ratings
 * Admin Dashboard
@@ -403,20 +280,12 @@ Replace `your_mongodb_connection_string` with your MongoDB Atlas connection stri
 
 ## 📬 Contact
 
-For bugs, issues, or feature requests, feel free to reach out:
-
 📧 **[ramrakhyani.shikha@gmail.com](mailto:ramrakhyani.shikha@gmail.com)**
-
----
 
 ## 👩‍💻 Author
 
 Built with ❤️ by **Shikha Ramrakhyani**
-
-GitHub:
-https://github.com/Shikha246
-
----
+GitHub: https://github.com/Shikha246
 
 ## ⭐ Support
 
