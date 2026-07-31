@@ -71,7 +71,7 @@ const handleLogout = () =>{
 
         {/* Navbar Content */}
         <div className="collapse navbar-collapse align-items-start text-start" id="navbarContent">
-          {/* Search Bar */}
+          
           <form className="d-flex flex-column flex-lg-row mx-lg-auto my-2" style={{ maxWidth: "600px", width: "100%" }} onSubmit={onSearchClicked}>
             <input
               className="form-control w-100 mb-2 mb-lg-0 me-lg-2"
